@@ -1,10 +1,7 @@
-This repository contains the introduction and demo files used for "Statistical Methods for Time Series Analysis of Rhythms" (SMTSA) workshop
-in 2016 SRBR meeting. 
+This repository contains the introduction and demo files used for "Statistical Methods for Time Series Analysis of Rhythms" (SMTSA) workshop in 2016 SRBR meeting. 
 
 ## Introduction
-The SMTSA workshop will be hosted by Dr. Tanya Leise and Dr. John Hogenesch. This 90 minute workshop will firstly give an overview of various statistical  
-methods used for analyzing biological time-series data. The respective strengths and limitations of each mentioned approach will also be discussed. Then 
-the workshop will give a demo of evaluating periodicity in large scale data. During the demo, we will show how to analyze time-series datasets with various
+The SMTSA workshop will be hosted by Dr. Tanya Leise and Dr. John Hogenesch. This 90 minute workshop will firstly give an overview of various statistical methods used for analyzing biological time-series data. The respective strengths and limitations of each mentioned approach will also be discussed. Then the workshop will give a demo of evaluating periodicity in large scale data. During the demo, we will show how to analyze time-series datasets with various
 sampling patterns using [MetaCycle](http://biorxiv.org/content/early/2016/02/19/040345) and do phase enrichment analysis with [PSEA](http://jbr.sagepub.com/content/31/3/244.long). At last, all participants are welcome to bring their own datasets and/or 
 questions of analyzing time-series datasets into the workshop. We will leave 10 to 15 minutes in this workshop to try your own dataset or answering your questions.
 
@@ -45,8 +42,9 @@ Please contact the workshop assistant (Gang Wu: wggucas@gmail.com) if you have p
 Knowing a little knowledge about R language will be great helpful for touring this workshop. If you have not used R before and are interested with learning R, taking a quick tour in [DataCamp](https://www.datacamp.com/home), or [Try R](http://tryr.codeschool.com/levels/1/challenges/3) or [R tutorials](http://www.r-bloggers.com/how-to-learn-r-2/) may save your time. If you are not interested with learning R language except those commands frequently used in this workshop, please try below command in the RStudio.
 
 ```r
-# If there is a directory named 'SRBR_SMTSAworkshop' in the 'Desktop' directory of your laptop, you could change the working directory to 'SRBR_SMTSAworkshop' 
-# through clicking 'Session | Set Working Directory | Choose Directory...', or by typing below command
+# If there is a directory named 'SRBR_SMTSAworkshop' in the 'Desktop' directory of your laptop, 
+# you could change the working directory to 'SRBR_SMTSAworkshop' through
+# clicking 'Session | Set Working Directory | Choose Directory...', or by typing below command
 setwd("~/Desktop/SRBR_SMTSAworkshop") 
 
 # how to load an installed package
