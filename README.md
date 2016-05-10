@@ -2,10 +2,7 @@ This repository contains the introduction and demo files used for "Statistical M
 in 2016 SRBR meeting. 
 
 ## Introduction
-The SMTSA workshop will be hosted by Dr. Tanya Leise and Dr. John Hogenesch. This 90 minute workshop will firstly give an overview of various statistical  
-methods used for analyzing biological time-series data. The respective strengths and limitations of each mentioned approach will also be discussed. Then 
-the workshop will give a demo of evaluating periodicity in large scale data. During the demo, we will show how to analyze time-series datasets with various
-sampling patterns using [MetaCycle](http://biorxiv.org/content/early/2016/02/19/040345) and do phase enrichment analysis with [PSEA](http://jbr.sagepub.com/content/31/3/244.long). At last, all participants are welcome to bring their own datasets and/or 
+The SMTSA workshop will be hosted by Dr. Tanya Leise and Dr. John Hogenesch. This 90 minute workshop will firstly give an overview of various statistical methods used for analyzing biological time-series data. The respective strengths and limitations of each mentioned approach will also be discussed. Then the workshop will give a demo of evaluating periodicity in large scale data. During the demo, we will show how to analyze time-series datasets with various sampling patterns using [MetaCycle](http://biorxiv.org/content/early/2016/02/19/040345) and do phase enrichment analysis with [PSEA](http://jbr.sagepub.com/content/31/3/244.long). At last, all participants are welcome to bring their own datasets and/or 
 questions of analyzing time-series datasets into the workshop. We will leave 10 to 15 minutes in this workshop to try your own dataset or answering your questions.
 
 ## Before the workshop
