@@ -10,13 +10,13 @@ questions of analyzing time-series datasets into the workshop. We will leave 10 
 
 ## Before the workshop
 
-### Pre-installed software
+##### Pre-installed software
 * Please visit [CRAN](https://cran.cnr.berkeley.edu) to download the latest R(3.3.0) and install it on your notebook computer.
 * Please visit [RStudio](https://www.rstudio.com/products/rstudio/download/)(an Integrated Development Environment that makes programming easier) to download the latest RStudio Desktop and install it on your notebook computer.
 * Please visit [Java](http://java.com/en/download/manual.jsp) website to download the latest Java(≥ 1.5) and install it on your notebook computer.
 * If there is only Internet Explorer(IE) web browser on your laptop, please download and install another web browser (eg. [Chrome](https://www.google.com/chrome/browser/desktop/) or [Firefox](https://www.mozilla.org/en-US/firefox/new/)) on your notebook computer. 
 
-### Pre-installed R packages
+##### Pre-installed R packages
 
 Open the RStudio, look at the 'Console' part and make sure the listed R version is 'R version 3.3.0'. If there are multiple R versions installed on your laptop, please follow [Using Different Versions of R](https://support.rstudio.com/hc/en-us/articles/200486138-Using-Different-Versions-of-R) to switch R version to the latest one. Then in the 'Console' part, type below command to install required packages.
 
@@ -38,7 +38,7 @@ biocLite()
 
 ```
 
-### A little knowledge about R language
+##### A little knowledge about R language
 
 Knowing a little knowledge about R language will be great helpful for touring this workshop. If you have not used R before and are interested with learning R, taking a quick tour in [DataCamp](https://www.datacamp.com/home), or [Try R](http://tryr.codeschool.com/levels/1/challenges/3) or [R tutorials](http://www.r-bloggers.com/how-to-learn-r-2/) may save your time. If you are not interested with learning R language except those commands frequently used in this workshop, please try below command in the RStudio.
 
@@ -67,18 +67,19 @@ head(dataD)
 
 ```
 
-### Take a look at the demo files
+##### Take a look at the demo files
 
 The demo files will be uploaded under 'demo' directory of this repository, five days before this workshop. 
 
-### Download SRBR_SMTSAworkshop, MetaCycleApp and PSEA repositories to your notebook computer.
+##### Download SRBR_SMTSAworkshop, MetaCycleApp and PSEA repositories to your notebook computer.
+
 Click [SRBR_SMTSAworkshop](https://github.com/gangwug), [MetaCycleApp](https://github.com/gangwug/MetaCycleApp) and [PSEA](https://github.com/ranafi/PSEA) one by one, and click 'Download ZIP' button within each repository. 
 
-### Prepare your own datasets if you hope to try your them at the end of this workshop.
+##### Prepare your own datasets if you hope to try your them at the end of this workshop.
 
-### Contact the workshop assistant (Gang Wu: wggucas@gmail.com) if you have problems in installing softwares, packages or downloading repositories to your notebook computer.
+##### Contact the workshop assistant (Gang Wu: wggucas@gmail.com) if you have problems in installing softwares, packages or downloading repositories to your notebook computer.
 
-### Keep track of this page, which will show update news at the end of this page.
+##### Keep track of this page, which will show update news at the end of this page.
 
 ## Day of the workshop
 * Bring a fully charged notebook computer to the workshop.
