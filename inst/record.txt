@@ -1,0 +1,17 @@
+##download the table from GEO under GSE11923
+##remove the rows before column names with emacs
+##replace the quotes
+perl  -pi -e  's/\"//g'  GSE11923_series_matrix.txt
+##replace the 'ID_REF'
+perl  -pi -e  's/\ID_REF/ProbeID/g'  GSE11923_series_matrix.txt
+##replace the last line
+perl  -pi -e  's/\!series_matrix_table_end//g'  GSE11923_series_matrix.txt
+##rename the file name
+mv  GSE11923_series_matrix.txt   Hughes2009_MouseLiver1h.txt
+##rename the column names
+rm(list=ls())
+options(stringsAsFactors=FALSE)
+dataD <- read.delim("../data-raw/Hughes2009_MouseLiver1h.txt")
+newname <- paste("CT", 18:65, sep="")
+colnames(dataD) <- c("ProbeID", newname)
+write.table(dataD, file="../data-raw/Hughes2009_MouseLiver1h.txt", quote=FALSE, sep="\t", row.names=FALSE)
