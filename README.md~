@@ -30,6 +30,7 @@ install.packages("cowplot")
 # try http:// if https:// URLs are not supported
 source("https://bioconductor.org/biocLite.R")
 biocLite()
+
 ```
 
 Please contact the workshop assistant (Gang Wu: wggucas@gmail.com) if you have problems in installing softwares, packages to your notebook computer.
@@ -46,18 +47,22 @@ setwd("~/Desktop/SRBR_SMTSAworkshop")
 
 # how to load an installed package
 library(MetaCycle)
+
 # how to find the help documentation about a function (eg. 'filter' function in 'dplyr' package)
 library(dplyr)
 ?filter
+
 # how to use the function by following the example part in the documentation file
 filter(mtcars, cyl < 6)
 
 # how to write the data to a file
 write.csv(mtcars, file="mtcars.csv")
+
 # how to read a file into a data frame
 dataD <- read.csv("mtcars.csv")
 # look at the top six rows of a data frame
 head(dataD)
+
 ```
 
 ##### 4. Take a look at the demo files
