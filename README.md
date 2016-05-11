@@ -6,9 +6,9 @@ The SMTSA workshop will be hosted by Dr. Tanya Leise and Dr. John Hogenesch. Thi
 ## Before the workshop
 
 ##### 1. Pre-installed software
-* Please visit [CRAN](https://cran.cnr.berkeley.edu) to download the latest R(3.3.0) and install it on your notebook computer.
-* Please visit [RStudio](https://www.rstudio.com/products/rstudio/download/)(an Integrated Development Environment that makes programming easier) to download the latest RStudio Desktop and install it on your notebook computer.
-* Please visit [Java](http://java.com/en/download/manual.jsp) website to download the latest Java and install it on your notebook computer.
+* Please visit [CRAN](https://cran.cnr.berkeley.edu) to download the latest released R(3.3.0) and install it on your notebook computer.
+* Please visit [RStudio](https://www.rstudio.com/products/rstudio/download/)(an Integrated Development Environment that makes programming easier) to download the latest released RStudio Desktop and install it on your notebook computer.
+* Please visit [Java](http://java.com/en/download/manual.jsp) website to download the latest released Java and install it on your notebook computer.
 * If there is only Internet Explorer(IE) web browser on your laptop, please download and install another web browser (eg. [Chrome](https://www.google.com/chrome/browser/desktop/) or [Firefox](https://www.mozilla.org/en-US/firefox/new/)) on your notebook computer. 
 
 ##### 2. Pre-installed R packages
@@ -32,7 +32,7 @@ source("https://bioconductor.org/biocLite.R")
 biocLite()
 ```
 
-Please contact the workshop assistant (Gang Wu: wggucas@gmail.com) if you have problems in installing softwares or packages to your notebook computer.
+Please contact the workshop assistant (Gang Wu: wggucas@gmail.com) if you have problems in installing software or packages to your notebook computer.
 
 ##### 3. A little knowledge about R language
 
