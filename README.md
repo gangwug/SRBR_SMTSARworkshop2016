@@ -18,7 +18,7 @@ Open the RStudio, look at the 'Console' part and make sure the listed R version 
 ```r
 # install 'shiny' package
 install.packages("shiny")
-# type below command to install 'MetaCycle' package
+# install 'MetaCycle' package
 install.packages("MetaCycle")
 # install 'dplyr' package
 install.packages("dplyr")
@@ -32,7 +32,7 @@ source("https://bioconductor.org/biocLite.R")
 biocLite()
 ```
 
-Please contact the workshop assistant (Gang Wu: wggucas@gmail.com) if you have problems in installing softwares, packages to your notebook computer.
+Please contact the workshop assistant (Gang Wu: wggucas@gmail.com) if you have problems in installing softwares or packages to your notebook computer.
 
 ##### 3. A little knowledge about R language
 
