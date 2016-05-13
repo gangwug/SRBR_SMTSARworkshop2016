@@ -70,7 +70,7 @@ The demo files will be uploaded under 'demo' directory of this repository at lea
 ##### 5. Download three repositories to your notebook computer
 
 * Click [SRBR_SMTSAworkshop](https://github.com/gangwug/SRBR_SMTSAworkshop), [MetaCycleApp](https://github.com/gangwug/MetaCycleApp) and [PSEA](https://github.com/ranafi/PSEA) one by one to visit each repository.
-* Within each repository, click 'Download ZIP' button on the right side of the pasge to download each repository to your notebook computer. 
+* Within each repository, click 'Download ZIP' button on the right side of the page to download each repository to your notebook computer. 
 * Unzip the downloaded repositories, and put them on the Desktop of your notebook computer.
 
 ##### 6. Prepare your own datasets if you hope to try them at the end of this workshop.
