@@ -13,7 +13,9 @@ The SMTSA workshop will be hosted by Dr. Tanya Leise of Amherst College and Dr. 
 
 ##### 2. Pre-installed R packages
 
-Open the RStudio, look at the 'Console' part and make sure the listed R version is 'R version 3.3.0'. If there are multiple R versions installed on your laptop, please follow [Using Different Versions of R](https://support.rstudio.com/hc/en-us/articles/200486138-Using-Different-Versions-of-R) to switch R version to the latest one. Then in the 'Console' part, type below command to install required packages.
+* Open RStudio and check the text at the top of the Console window to find the listed R version, which should be 'R version 3.3.0.'.
+* If there are multiple R versions installed on your laptop, please follow [Using Different Versions of R](https://support.rstudio.com/hc/en-us/articles/200486138-Using-Different-Versions-of-R) to switch R version to the latest one. 
+* In the Console window, type below command to install required packages.
 
 ```r
 # install 'shiny' package
@@ -36,7 +38,7 @@ Please contact the workshop assistant (Gang Wu: wggucas@gmail.com) if you have p
 
 ##### 3. A little knowledge about R language
 
-Knowing a little R language will be helpful for this workshop. If you have not used R before and are interested with learning R, take a quick tour in [DataCamp](https://www.datacamp.com/home), or [Try R](http://tryr.codeschool.com/levels/1/challenges/3) or [R tutorials](http://www.r-bloggers.com/how-to-learn-r-2/). If you are not interested in learning R language, please try the below command in the RStudio.
+Knowing a little R language will be helpful for this workshop. If you have not used R before and are interested with learning R, take a quick tour in [DataCamp](https://www.datacamp.com/home), or [Try R](http://tryr.codeschool.com/levels/1/challenges/3) or [R tutorials](http://www.r-bloggers.com/how-to-learn-r-2/). At a minimum, please try the commands below in RStudio to learn a few basics about working with R.
 
 ```r
 # Suppose that there is a directory named 'SRBR_SMTSAworkshop' in the 'Desktop' directory, 
@@ -66,9 +68,12 @@ The demo files will be uploaded under 'demo' directory of this repository at lea
 
 ##### 5. Download three repositories to your notebook computer
 
-Click [SRBR_SMTSAworkshop](https://github.com/gangwug), [MetaCycleApp](https://github.com/gangwug/MetaCycleApp) and [PSEA](https://github.com/ranafi/PSEA) one by one, and click 'Download ZIP' button within each repository. 
+* Click [SRBR_SMTSAworkshop](https://github.com/gangwug/SRBR_SMTSAworkshop), [MetaCycleApp](https://github.com/gangwug/MetaCycleApp) and [PSEA](https://github.com/ranafi/PSEA) one by one to visit each repository.
+* Within each repository, click 'Download ZIP' button on the right side of the pasge to download each repository to your laptop. 
 
 ##### 6. Prepare your own datasets if you hope to try them at the end of this workshop.
+* Prepare your own datasets in the same format as the sample sets. See the file 'Hughes2009_MouseLiver1h.txt' provided in the SRBR_SMTSAworkshop repository as an example. 
+* Each time series data will be a row of the spreadsheet, with a top header row and a leftmost column of labels, saved as a tab-delimited txt file or comm-delimited csv file.
 
 ## Day of the workshop
 * Bring a fully charged notebook computer to the workshop.
