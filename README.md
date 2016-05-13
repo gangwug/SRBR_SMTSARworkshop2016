@@ -72,7 +72,7 @@ The demo files will be uploaded under 'demo' directory of this repository at lea
 * Within each repository, click 'Download ZIP' button on the right side of the pasge to download each repository to your laptop. 
 
 ##### 6. Prepare your own datasets if you hope to try them at the end of this workshop.
-* Prepare your own datasets in the same format as the sample sets. See the file 'Hughes2009_MouseLiver1h.txt' provided in the SRBR_SMTSAworkshop repository as an example. 
+* Prepare your own datasets in the same format as the sample sets. See the file 'Hughes2009_MouseLiver1h.txt' provided in the 'data-raw' directory of the SRBR_SMTSAworkshop repository as an example. 
 * Each time series data will be a row of the spreadsheet, with a top header row and a leftmost column of labels, saved as a tab-delimited txt file or comm-delimited csv file.
 
 ## Day of the workshop
