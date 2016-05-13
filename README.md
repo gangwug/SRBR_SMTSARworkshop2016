@@ -1,3 +1,4 @@
+
 This repository has the introduction and demo files used for the "Statistical Methods for Time Series Analysis of Rhythms" (SMTSA) workshop at the 2016 SRBR meeting. 
 
 ## Introduction
@@ -69,7 +70,8 @@ The demo files will be uploaded under 'demo' directory of this repository at lea
 ##### 5. Download three repositories to your notebook computer
 
 * Click [SRBR_SMTSAworkshop](https://github.com/gangwug/SRBR_SMTSAworkshop), [MetaCycleApp](https://github.com/gangwug/MetaCycleApp) and [PSEA](https://github.com/ranafi/PSEA) one by one to visit each repository.
-* Within each repository, click 'Download ZIP' button on the right side of the pasge to download each repository to your laptop. 
+* Within each repository, click 'Download ZIP' button on the right side of the pasge to download each repository to your notebook computer. 
+* Unzip the downloaded repositories, and put them on the Desktop of your notebook computer.
 
 ##### 6. Prepare your own datasets if you hope to try them at the end of this workshop.
 * Prepare your own datasets in the same format as the sample sets. See the file 'Hughes2009_MouseLiver1h.txt' provided in the 'data-raw' directory of the SRBR_SMTSAworkshop repository as an example. 
