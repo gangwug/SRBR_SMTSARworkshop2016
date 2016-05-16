@@ -391,10 +391,9 @@ phaseD <- select(figureD, CycID, meta2d_phase)
 # if it reports error after typing above command, please re-run the code of preparing 'figureD' in the first part of 3.5 section of this demo
 
 # read in the annotation file-'annoDbiMainInfMouse4302.txt' in the 'data-raw' directory
-annoD <- read.delim("~/Desktop/SRBR_SMTSAworkshop-master/data-raw/annoDbiMainInfMouse4302.txt", stringsAsFactors = FALSE)
-dim(annoD)
+annoD <- read.delim("~/Desktop/SRBR_SMTSAworkshop-master/data-raw/Mouse4302ProbeAnnotation.txt", stringsAsFactors = FALSE)
 # add annotation information with 'inner_join' function of dplyr package
-phaseD <- inner_join(figureD, annoD, by=c("CycID" = "PROBEID"))
+phaseD <- inner_join(phaseD, annoD, by=c("CycID" = "PROBEID"))
 
 # take a look at the phaseD
 head(phaseD)

@@ -19,4 +19,4 @@ write.table(dataD, file="../data-raw/Hughes2009_MouseLiver1h.txt", quote=FALSE, 
 rm(list=ls())
 dataD <- read.delim("~/Desktop/annoDbiMainInfMouse4302UniProbe.txt", stringsAsFactors = FALSE)
 outD <- dataD[,1:3]
-write.table(dataD, file="~/Desktop/Mouse4302ProbeAnnotation.txt", quote=FALSE, sep="\t", row.names=FALSE)
+write.table(outD, file="~/Desktop/Mouse4302ProbeAnnotation.txt", quote=FALSE, sep="\t", row.names=FALSE)
