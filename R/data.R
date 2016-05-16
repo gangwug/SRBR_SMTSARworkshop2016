@@ -8,9 +8,16 @@ livD <- read.delim("./data-raw/Hughes2009_MouseLiver1h.txt", stringsAsFactors = 
 rownum <- nrow(livD)                 # the number of rows
 curvnum <- 20                        # the number of selected probesets for the case 
 
-## generate caseB dataset (4h / 1day begins with CT19), txt file
+## generate exerciseA dataset (4h / 1day begins with CT19), txt file
+exerciseA <- livD[sample(1:rownum, curvnum), ]
+exerciseA <- select(exerciseA, ProbeID, num_range("CT", seq(19, 39, by=4), width = 2) )
+write.table(exerciseA, file = "./data/exerciseA.txt", sep = "\t", quote = FALSE, row.names = FALSE)
+
+## generate caseB dataset (6h/2days begins with CT20, with one missing time point), txt file
 caseB <- livD[sample(1:rownum, curvnum), ]
-caseB <- select(caseB, ProbeID, num_range("CT", seq(19, 39, by=4), width = 2) )
+caseB <- select(caseB, ProbeID, num_range("CT", seq(20, 62, by=6), width = 2) )
+indexB <- sample(3:8, 1)
+caseB[,indexB] <- NA
 write.table(caseB, file = "./data/caseB.txt", sep = "\t", quote = FALSE, row.names = FALSE)
 
 ## generate caseA dataset (4h / 2days begins with CT18), csv file
@@ -18,23 +25,12 @@ colnames(livD) <- c("ProbeID", 18:65)
 caseA <- livD[sample(1:rownum, curvnum), c("ProbeID", seq(18, 62, by=4))]
 write.csv(caseA, file = "./data/caseA.csv", quote = FALSE, row.names = FALSE)
 
-## generate caseC dataset (6h/2days begins with CT20, with one missing time point), csv file
-caseC <- livD[sample(1:rownum, curvnum), c("ProbeID", seq(20, 62, by=6))]
-indexA <- sample(3:8, 1)
-caseC[,indexA] <- NA
+## generate caseC dataset (cell cycle, sampling interval is 16min, 11 samples in total, default  time for one cell cycle in this kind of yease is 85min), csv file
+caseC <- cycYeastCycle
+colnames(caseC) <- c("ProbeID", seq(2, 162, by=16))
 write.csv(caseC, file = "./data/caseC.csv", quote = FALSE, row.names = FALSE)
 
-## generate caseD dataset (3h / 2days, 3 replicates at each time points, random missing value at each time point), csv file
-caseD <- cycMouseLiverProtein
-colnames(caseD) <- c("geneSymbol", rep(seq(0, 45, by=3), each = 3)) 
-write.csv(caseD, file = "./data/caseD.csv", quote = FALSE, row.names = FALSE)
-
-## generate caseE dataset (cell cycle, sampling interval is 16min, 11 samples in total, default  time for one cell cycle in this kind of yease is 85min), csv file
-caseE <- cycYeastCycle
-colnames(caseE) <- c("ProbeID", seq(2, 162, by=16))
-write.csv(caseE, file = "./data/caseE.csv", quote = FALSE, row.names = FALSE)
-
-## generate exerciseA and exerciseB dataset
+## generate exerciseB and exerciseC dataset
 simuCurve <- function (records, replicates=1, cos.amp=1, sdv=1)
 {
 	## the function of generating cosine signals
@@ -69,29 +65,34 @@ simuCurve <- function (records, replicates=1, cos.amp=1, sdv=1)
 	return (cosp.sig)
 }
 
-## exerciseA, simulated cosine curves with noise (4h / 2days, 3 replicates at each time point), csv file 
-exerciseA <- simuCurve(records=curvnum, replicates=3, cos.amp=2, sdv=1)
-exerciseA <- as.data.frame(exerciseA)
-exerciseA <- mutate(exerciseA, "curveID" = rownames(exerciseA) )
-exerciseA <- exerciseA[,c(ncol(exerciseA), 1:(ncol(exerciseA) - 1) )]
-colnames(exerciseA) <- c("curveID", rep(seq(0, 44, by=4), each=3))
-write.csv(exerciseA, file = "./data/exerciseA.csv", quote = FALSE, row.names = FALSE)
-
-## exerciseB, simulated cosine curves with noise (4h / 2days, varied number of replicates[1,3] at each time point), csv file
-rnum <- sample(1:3, 12, replace = TRUE)
-indexB <- matrix(2:ncol(exerciseA), ncol=3, byrow = TRUE)
-indexB <- cbind(indexB, rnum)
-indexC <- apply(indexB, 1, function(z) { sample(z[1:3], z[4]) } )
-indexC <- c(1, sort(unlist(indexC)) )
-exerciseB <- exerciseA[, indexC]
-colnames(exerciseB) <- colnames(exerciseA)[indexC]
+## exerciseB, simulated cosine curves with noise (4h / 2days, 3 replicates at each time point), csv file 
+exerciseB <- simuCurve(records=curvnum, replicates=3, cos.amp=2, sdv=1)
+exerciseB <- as.data.frame(exerciseB)
+exerciseB <- mutate(exerciseB, "curveID" = rownames(exerciseB) )
+exerciseB <- exerciseB[,c(ncol(exerciseB), 1:(ncol(exerciseB) - 1) )]
+colnames(exerciseB) <- c("curveID", rep(seq(0, 44, by=4), each=3))
 write.csv(exerciseB, file = "./data/exerciseB.csv", quote = FALSE, row.names = FALSE)
 
-## exerciseC, un-even sampled, with 16 timepoints
-indexD <- sample(18:65, 16)
-indexD <- sort(indexD)
-exerciseC <- livD[sample(1:rownum, curvnum), c("ProbeID", indexD)]
+## exerciseC, simulated cosine curves with noise (4h / 2days, varied number of replicates[1,3] at each time point), csv file
+rnum <- sample(1:3, 12, replace = TRUE)
+indexC <- matrix(2:ncol(exerciseB), ncol=3, byrow = TRUE)
+indexC <- cbind(indexC, rnum)
+indexD <- apply(indexC, 1, function(z) { sample(z[1:3], z[4]) } )
+indexD <- c(1, sort(unlist(indexD)) )
+exerciseC <- exerciseB[, indexD]
+colnames(exerciseC) <- colnames(exerciseB)[indexD]
 write.csv(exerciseC, file = "./data/exerciseC.csv", quote = FALSE, row.names = FALSE)
+
+## generate exerciseD dataset (3h / 2days, 3 replicates at each time points, random missing value at each time point), csv file
+exerciseD <- cycMouseLiverProtein
+colnames(exerciseD) <- c("geneSymbol", rep(seq(0, 45, by=3), each = 3)) 
+write.csv(exerciseD, file = "./data/exerciseD.csv", quote = FALSE, row.names = FALSE)
+
+## exerciseE, un-even sampled, with 16 timepoints
+indexE <- sample(18:65, 16)
+indexE <- sort(indexE)
+exerciseE <- livD[sample(1:rownum, curvnum), c("ProbeID", indexE)]
+write.csv(exerciseE, file = "./data/exerciseE.csv", quote = FALSE, row.names = FALSE)
 
 ## generate an experimental like data (2h / 2days begins with CT18), csv file
 curvnum <- 10000
