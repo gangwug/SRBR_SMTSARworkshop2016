@@ -245,6 +245,7 @@ library("cowplot")
 ```{r, eval=FALSE, warning=FALSE}
 # change working directory to the desktop 
 setwd("~/Desktop")
+
 # check required directories under the desktop
 dir()
 ```
@@ -272,6 +273,7 @@ dir()
 ```{r, eval=FALSE, warning=FALSE}
 # load shiny package
 library("shiny")
+
 # use 'runGitHub' function of shiny package
 runGitHub("MetaCycleApp", "gangwug")
 ```
@@ -281,6 +283,7 @@ runGitHub("MetaCycleApp", "gangwug")
 ```{r, eval=FALSE, warning=FALSE}
 # load shiny package
 library("shiny")
+
 # use 'runApp' function of shiny package
 runApp("~/Desktop/MetaCycleApp-master")
 ```
@@ -335,24 +338,70 @@ runApp("~/Desktop/MetaCycleApp-master")
 
 ### 3.5. Check the expression profiles of circadian transcripts (FDR < 0.05) and show their phase distribution
 
-* #### type below command in the 'Console' window of RStudio to take a look at expression profiles of circadian transcripts by heatmap figure
+* #### Type below command in the 'Console' window of RStudio to prepare the dataframe ('figureD') used for drawing figures
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, message=FALSE}
 # load dplyr package
 library("dplyr")
-# load the function used to draw heatmap
-source("~/SRBR_SMTSAworkshop-master/R/fig.R")
+
 # read in the 'meta2d_experientA.csv' file
+dataD <- read.csv("~/Desktop/SRBR_SMTSAworkshop-master/result/meta2d_experimentA.csv", stringsAsFactors = FALSE)
+# take a look at column names of the data
+colnames(dataD)
 
+# filter the data by meta2d_BH.Q < 0.05 by 'filter' function of dplyr
+cirD <- filter(dataD, meta2d_BH.Q < 0.05)
+# see the number of circadian transcripts
+nrow(cirD)
 
+# select "CycID", "meta2d_period", "meta2d_phase", and "X18" to "X64" columns for drawing heatmap by 'select' function of dplyr package
+figureD <- select(cirD, CycID, meta2d_period, meta2d_phase, num_range("X", seq(18, 64, by=2), width = 2))
 ```
 
+* #### Type below command in the 'Console' window of RStudio to draw a heatmap figure of circadian transcripts (if the code runs well, a heatmap figure will show in the bottom right window of the RStudio)
 
-* #### 
+```{r, warning=FALSE, message=FALSE}
+# load 'heatmapF' and 'phaseHist' function used to draw heatmap and histogram
+source("~/Desktop/SRBR_SMTSAworkshop-master/R/fig.R")
+
+# get the heatmap figure by 'heatmapF' function
+heatmapFigure <- heatmapF(inputD = figureD, minfold=0.5, maxfold=2)
+
+heatmapFigure
+```
+
+* #### Type below command in the 'Console' window of RStudio to draw a histgram for phase distribution of circadian transcripts selected above (if the code runs well, a histogram figure will show in the bottom right window of the RStudio)
+
+```{r, warning=FALSE, message=FALSE}
+# get the phase distribtuion figure by 'phaseHist' function
+histFigure <- phaseHist(inputD = figureD, binvalue=seq(0,24,by=2), histcol = "blue")
+
+histFigure
+```
 
 ## 4. The demo pipeline about PSEA
 
+#### Phase Set Enrichment Analysis (PSEA) is designed to incorporate prior knowledge into the analysis of periodic data. PSEA could identify biologically related gene sets showing temporally coordinated expression. For more detail introduction about PSEA, please see Ray's [PSEA paper](http://jbr.sagepub.com/content/31/3/244.long). 
 ### 4.1. Prepare the file used for PSEA analysis
+* #### Type below command in the 'Console' window of RStudio to prepare the file used to PSEA analysis
+
+```{r, warning=FALSE, message=FALSE}
+# make sure that 'figureD' dataframe is not deleted, and select its 'CycID' and 'meta2d_phase' columns for later analysis
+phaseD <- select(figureD, CycID, meta2d_phase)
+# if it reports error after typing above command, please re-run the code of preparing 'figureD' in the first part of 3.5 section of this demo
+
+# read in the annotation file-'annoDbiMainInfMouse4302.txt' in the 'data-raw' directory
+annoD <- read.delim("~/Desktop/SRBR_SMTSAworkshop-master/data-raw/annoDbiMainInfMouse4302.txt", stringsAsFactors = FALSE)
+dim(annoD)
+# add annotation information with 'inner_join' function of dplyr package
+phaseD <- inner_join(figureD, annoD, by=c("CycID" = "PROBEID"))
+
+# take a look at the phaseD
+head(phaseD)
+dim(phaseD)
+# select "CycID", by 'select' function of dplyr package
+#figureD <- select(cirD, CycID, meta2d_period, meta2d_phase, num_range("X", seq(18, 64, by=2), width = 2))
+```
 
 ### 4.2. Convert the mouse gene name to its human homologe gene name with 'MouseHumanConverter.jar'
 

@@ -15,3 +15,8 @@ dataD <- read.delim("../data-raw/Hughes2009_MouseLiver1h.txt")
 newname <- paste("CT", 18:65, sep="")
 colnames(dataD) <- c("ProbeID", newname)
 write.table(dataD, file="../data-raw/Hughes2009_MouseLiver1h.txt", quote=FALSE, sep="\t", row.names=FALSE)
+##select 'PROBED', 'ENTREZID' and 'SYMBOL' columns from 'annoDbiMainInfMouse4302UniProbe.txt', which is extracted and re-formed from 'mouse4302.db'
+rm(list=ls())
+dataD <- read.delim("~/Desktop/annoDbiMainInfMouse4302UniProbe.txt", stringsAsFactors = FALSE)
+outD <- dataD[,1:3]
+write.table(dataD, file="~/Desktop/Mouse4302ProbeAnnotation.txt", quote=FALSE, sep="\t", row.names=FALSE)
