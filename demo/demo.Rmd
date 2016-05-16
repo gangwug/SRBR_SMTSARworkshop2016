@@ -288,25 +288,25 @@ runApp("~/Desktop/MetaCycleApp-master")
 * ##### If the web application is successfully opened, it will show a window like below:
 ![](../inst/images/3-1MetaCycleApp.png)
 
-### 3.2. Analyze five cases with the web application of **meta2d**
+### 3.2. Analyze three cases with the web application of **meta2d**
 
 * ##### caseA (csv): 1) evenly sampled with 4h interval covering two days (from CT18 to CT62), 2) no replicate or missing value, 3) sampling time information is numeric value in the header
 
-* ##### caseB (txt): 1) evenly sampled with 4h interval covering one day (from CT19 to CT39), 2) no replicate or missing value, 3) sampling time information is non-numeric character in the header
+* ##### caseB (txt): 1) evenly sampled with 6h interval covering two days (from CT20 to CT62), 2) no replicate 3) one missing time point at CT56, 4) sampling time information is non-numeric character in the header
 
-* ##### caseC (csv): 1) evenly sampled with 6h interval covering two days (from CT20 to CT62), 2) no replicate 3) one missing time point at CT56, 4) sampling time information is numeric value in the header
+* ##### caseC (csv): 1) cell cycle data from yeast 2) evenly sampled with 16min interval from 2min to 162min, 3) no replicate or missing value, 4) the expected time length for cell cycle of this kind of yeast is 85min, 5) sampling time information is numeric value in the header
 
-* ##### caseD (csv): 1) evenly sampled with 3h interval covering two days (from CT0 to CT45), 2) three replicates at each time point 3) there is random missing value in one profile, 4) sampling time information is numeric value in the header
+### 3.3. Please analyze five exercise datasets with MetaCycleApp according to instructions mentioned above
 
-* ##### caseE (csv): 1) cell cycle data from yeast 2) evenly sampled with 16min interval from 2min to 162min, 3) no replicate or missing value, 4) the expected time length for cell cycle of this kind of yeast is 85min, 5) sampling time information is numeric value in the header
+* ##### exerciseA (txt): 1) evenly sampled with 4h interval covering one day (from CT19 to CT39), 2) no replicate or missing value, 3) sampling time information is non-numeric character in the header
 
-### 3.3. Please analyze three exercise datasets with MetaCycleApp according to instructions mentioned above
+* ##### exerciseB (csv): 1) evenly sampled with 4h interval covering two days, 2) three replicates at each time point, 3) no missing value, 4) sampling time information is numeric value in the header
 
-* ##### exerciseA (csv): 1) evenly sampled with 4h interval covering two days, 2) three replicates at each time point, 3) no missing value, 4) sampling time information is numeric value in the header
+* ##### exerciseC (csv): 1) evenly sampled with 4h interval covering two days, 2) varied number of replicates at each time point, 3) no missing value, 4) sampling time information is numeric value in the header
 
-* ##### exerciseB (csv): 1) evenly sampled with 4h interval covering two days, 2) varied number of replicates at each time point, 3) no missing value, 4) sampling time information is numeric value in the header
+* ##### exerciseD (csv): 1) evenly sampled with 3h interval covering two days (from CT0 to CT45), 2) three replicates at each time point 3) there is random missing value in one profile, 4) sampling time information is numeric value in the header
 
-* ##### exerciseC (csv): 1) un-evenly sampled from CT19 to CT57, 2) no replicates or missing value, 3) sampling time information is numeric value in the header
+* ##### exerciseE (csv): 1) un-evenly sampled from CT19 to CT57, 2) no replicates or missing value, 3) sampling time information is numeric value in the header
 
 ### 3.4. Analyze the experimental data (it may take several minutes)
 
