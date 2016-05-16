@@ -293,17 +293,27 @@ runApp("~/Desktop/MetaCycleApp-master")
 * #### caseA (csv): 1) evenly sampled with 4h interval covering two days (from CT18 to CT62), 2) no replicate or missing value, 3) sampling time information is numeric value in the header
     + ##### goal: use JTK_CYCLE to detect circadian transcripts with MetaCycleApp
     + ##### step 1: click 'Choose File' button to upload caseA dataset from 'data' directory
-    
-    + ##### step 2: set the parameters as shown below and click 'Run' button
-    
-    + ##### step 3: download the analysis results to 'result' directory
-    
+    ![](../inst/images/3-2CaseA_Step1.png)
+    + ##### step 2: set the parameters as shown below (set 'minper' and 'maxper' to 24 and select 'JTK' from 'cycMethod') and click 'Run' button
+    ![](../inst/images/3-2CaseA_Step2.png)
+    + ##### step 3: take a quick check of the analysis results
+    ![](../inst/images/3-2CaseA_Step3.png)
+    + ##### step 4: download the analysis results (named as 'meta2d_caseA.csv') to 'result' directory
+    ![](../inst/images/3-2CaseA_Step4.png)
 
 * #### caseB (txt): 1) evenly sampled with 6h interval covering two days (from CT20 to CT62), 2) no replicate 3) one missing time point at CT50, 4) sampling time information is non-numeric character in the header
-
-* #### caseC (csv): 1) cell cycle data from yeast 2) evenly sampled with 16min interval from 2min to 162min, 3) no replicate or missing value, 4) the expected time length for cell cycle of this kind of yeast is 85min, 5) sampling time information is numeric value in the header
+    + ##### goal: use JTK_CYCLE and Lomb-Scargle to detect circadian transcripts with MetaCycleApp
+    + ##### detail steps: 1) follow caseA to upload caseB dataset from 'data' directory, 2) parameters setting: select 'txt' under fileStyle, paste comma-delimited time values under 'timepoints', set 'minper' and 'maxper' to 24, and select 'JTK' and 'LS' under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save outputs (named as 'meta2d_caseB.txt') to 'result' directory, 5) you could see a window like below during analyzing caseB dataset
+    ![](../inst/images/3-2CaseB.png)
+    
+* #### caseC (csv): 1) cell cycle data from yeast, 2) evenly sampled with 16min interval from 2min to 162min, 3) no replicate or missing value, 4) the expected time length for cell cycle of this kind of yeast is 85min, 5) sampling time information is numeric value in the header
+    + ##### goal: use ARSER, JTK_CYCLE and Lomb-Scargle to detect cycling transcripts from yeast cell cycle dataset
+    + ##### detail steps: 1) follow above cases to upload caseC dataset from 'data' directory, 2) parameters setting: select 'csv' under fileStyle, type 'Header' under 'timepoints', set 'minper' as 80 and 'maxper' as 96, set 'ARSdefaultPer' as 85, and select all three methods under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save outputs (named as 'meta2d_caseC.csv') to 'result' directory, 5) you could see a window like below during analyzing caseC dataset
+    ![](../inst/images/3-2CaseC.png)
 
 ### 3.3. Please analyze five exercise datasets with MetaCycleApp according to instructions mentioned above
+
+* ##### general advice: 1) five exercise datasets (with 'exercise' in the file name) could be found in 'data' directory, 2) select all three methods under 'cycMethod' and MetaCycleApp will automaticlly select methods that could be used to analyze input dataset, 3) for search circadian profiles, it is better to set both 'minper' and 'maxper' as 24, 4) select 'csv' or 'txt' under 'fileStyle' according to input file, 5) sampling time information is non-numeric character in the header of exerciseA, please type comma-deliated time values under 'timepoints'; for other exercise datasets, type 'Header' under 'timepoints', 6) save the outputs in 'result' directory with different names
 
 * ##### exerciseA (txt): 1) evenly sampled with 4h interval covering one day (from CT19 to CT39), 2) no replicate or missing value, 3) sampling time information is non-numeric character in the header
 
@@ -317,7 +327,28 @@ runApp("~/Desktop/MetaCycleApp-master")
 
 ### 3.4. Analyze the experimental data (it may take several minutes)
 
+* ##### experimentA:  1) evenly sampled with 2h interval covering two days (from CT18 to CT64), 2) no replicate or missing value, 3) sampling time information is numeric value in the header, 4) including 10K probesets (about 1/4 of total probesets for MOE4302 array)
+
+* ##### general advice: 1) select 'JTK' and 'LS' in analyzing high-resolution datasets (eg. 2h / 2days, 'ARS' shows relative higher false positive rates in analyzing these kinds of datasets), 2) set 'minper' and 'maxper' both as '24' for searching circadian transcripts, 3) save outputs in 'result' directory and name it as 'meta2d_experimentA.csv', 4) if following above advice, you could see a window like below during analyzing this dataset
+
+![](../inst/images/3-4ExperimentA.png)
+
 ### 3.5. Check the expression profiles of circadian transcripts (FDR < 0.05) and show their phase distribution
+
+* #### type below command in the 'Console' window of RStudio to take a look at expression profiles of circadian transcripts by heatmap figure
+
+```{r, warning=FALSE}
+# load dplyr package
+library("dplyr")
+# load the function used to draw heatmap
+source("~/SRBR_SMTSAworkshop-master/R/fig.R")
+# read in the 'meta2d_experientA.csv' file
+
+
+```
+
+
+* #### 
 
 ## 4. The demo pipeline about PSEA
 
@@ -329,8 +360,3 @@ runApp("~/Desktop/MetaCycleApp-master")
 
 ## 5. Try your data or share your experience of analyzing time-series data
 
-### 5.1. Some experience in our previous analysis of time-series datasets
-
-### 5.2. It is your turn to analyze genome-wide time-series datasets and share your experience
-
-### 5.3. 
