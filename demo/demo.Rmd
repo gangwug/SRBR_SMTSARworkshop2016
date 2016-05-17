@@ -330,7 +330,7 @@ runApp("~/Desktop/MetaCycleApp-master")
 
 ### 3.4. Analyze the experimental data (it may take several minutes)
 
-* ##### experimentA:  1) evenly sampled with 2h interval covering two days (from CT18 to CT64), 2) no replicate or missing value, 3) sampling time information is numeric value in the header, 4) including 10K probesets (about 1/4 of total probesets for MOE4302 array)
+* ##### experimentA:  1) evenly sampled with 2h interval covering two days (from CT18 to CT64), 2) no replicate or missing value, 3) sampling time information is numeric value in the header, 4) including 20K probesets (about 1/2 of total probesets for MOE4302 array)
 
 * ##### general advice: 1) select 'JTK' and 'LS' in analyzing high-resolution datasets (eg. 2h / 2days, 'ARS' shows relative higher false positive rates in analyzing these kinds of datasets), 2) set 'minper' and 'maxper' both as '24' for searching circadian transcripts, 3) save outputs in 'result' directory and name it as 'meta2d_experimentA.csv', 4) if following above advice, you could see a window like below during analyzing this dataset
 
@@ -401,13 +401,19 @@ annoD <- read.delim("~/Desktop/SRBR_SMTSAworkshop-master/data-raw/Mouse4302Probe
 phaseD <- inner_join(phaseD, annoD, by=c("CycID" = "PROBEID"))
 # take a look at the phaseD
 head(phaseD)
+# filter out those probesets without annotation information
+phaseD <- filter(phaseD, SYMBOL != "NA")
 
 # select 'SYMBOL', 'meta2d_BH.Q' and 'meta2d_phase' columns for getting a dataframe without duplicate gene names
 ori_phaseD <- select(phaseD, SYMBOL, meta2d_BH.Q, meta2d_phase)
+# take a look at the row number with possilbe duplicate gene names
+dim(ori_phaseD)
 # load the 'uniF' function from 'fig.R' for doing this work
 source("~/Desktop/SRBR_SMTSAworkshop-master/R/fig.R")
 # get a dataframe without duplicate gene names
 uni_phaseD <- uniF(ori_phaseD)
+# take a look at the rownumber now
+dim(uni_phaseD)
 
 # select 'SYMBOL' and 'meta2d_phase' columns for PSEA analysis
 pseaD <- select(uni_phaseD, SYMBOL, meta2d_phase)
@@ -415,7 +421,7 @@ pseaD <- select(uni_phaseD, SYMBOL, meta2d_phase)
 head(pseaD)
 
 # write the 'pseaD' dataframe to a txt file-'experimentPSEA.txt' in 'result' directory
-write.table(pseaD, file = "~/Desktop/SRBR_SMTSAworkshop-master/result/experimentPSEA.txt", sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(pseaD, file = "~/Desktop/SRBR_SMTSAworkshop-master/result/experimentPSEA.txt", sep = "\t", quote = FALSE, row.names = FALSE)
 ```
 
 * #### Check the 'result' directory and make sure there is a file named 'experimentPSEA.txt'
@@ -424,17 +430,31 @@ write.table(pseaD, file = "~/Desktop/SRBR_SMTSAworkshop-master/result/experiment
 
 * #### Type below command in the 'Console' window of RStudio to convert the mouse gene name to its human homolog gene name
 
+```{r, warning=FALSE, message=FALSE}
+# read in the 'experimentPSEA.txt' file
+ori_pseaD <- read.delim("~/Desktop/SRBR_SMTSAworkshop-master/result/experimentPSEA.txt", stringsAsFactors = FALSE)
+# take a look at the data
+head(ori_pseaD)
 
-* #### Go to 'result' directory of 'SRBR_SMTSAworkshop-master' and you will find the output file named as 'human_experimentPSEA.txt'. The output file will look like below
+# read in the 'MouseHumanHomolog.txt' file in 'data-raw' directory of SRBR_SMTSAworkshop-master
+homoD <- read.delim("~/Desktop/SRBR_SMTSAworkshop-master/data-raw/MouseHumanHomolog.txt", stringsAsFactors = FALSE)
+# take a look at the data
+head(homoD)
 
-```{r, warning=FALSE}
-##  PPP2R5E 11.74247
-##  CCDC151 18.59238
-##  CYP7A1  15.34830
-##  UROD    16.22043
-##  SPC25  13.08001
-##  MCM4    21.68141
+# join mouse gene and human homolog gene with 'inner_join' function
+homo_pseaD <- inner_join(ori_pseaD, homoD, by=c("SYMBOL" = "Mouse_gene"))
+# take a look at the joined dataframe
+head(homo_pseaD)
+
+# select "Human_gene" and "meta2d_phase" columns for PSEA analysis
+outD <- select(homo_pseaD, Human_gene, meta2d_phase)
+# take a look at the selected data
+head(outD)
+# write it to a file named-'human_experimentPSEA.txt' in 'result' directory of SRBR_SMTSAworkshop-master
+write.table(outD, file = "~/Desktop/SRBR_SMTSAworkshop-master/result/human_experimentPSEA.txt", sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
 ```
+
+* #### Go to 'result' directory of SRBR_SMTSAworkshop-master and you will find the output file named as 'human_experimentPSEA.txt'. 
 
 ### 4.3. Do PSEA analysis with 'PSEA1.1_VectorGraphics.jar'
 
@@ -457,9 +477,15 @@ write.table(pseaD, file = "~/Desktop/SRBR_SMTSAworkshop-master/result/experiment
 
 * #### Click 'START' button under 'STEP 5 Generate output:' to generate output files and 'START' button will change to 'DONE' button as shown below
 
+![](../inst/images/4-3Step5.png)
 
+* #### Go to 'PSEAout' directory in 'result' directory and you will find three output files ('vsUniform.svg', 'vsBackground.svg' and 'results.txt') and two output directories ('vsUniform' and 'vsBackground'). Open 'vsUniform.svg', you will see all phase enriched itmes with significant q value, look like below
 
-* #### Go to 'result' directory of 'SRBR_SMTSAworkshop-master' and you will find the output file named as 'human_experimentPSEA.txt'. The output file will look like below
+![](../inst/images/4-3Step6Circle.png)
+
+* #### Go to 'vsUniform' directory within 'PSEAout' directory and you will find gene list corresponding to each enriched item shown on the 'vsUniform.svg'. There are also figures showing the phase distribution of listed genes for each enriched item, look like below
+
+![](../inst/images/4-3Step6Phase.png)
 
 ## 5. Try your data or share your experience of analyzing time-series data
 

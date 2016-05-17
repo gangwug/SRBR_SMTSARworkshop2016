@@ -20,3 +20,11 @@ rm(list=ls())
 dataD <- read.delim("~/Desktop/annoDbiMainInfMouse4302UniProbe.txt", stringsAsFactors = FALSE)
 outD <- dataD[,1:3]
 write.table(outD, file="~/Desktop/Mouse4302ProbeAnnotation.txt", quote=FALSE, sep="\t", row.names=FALSE)
+##select human and mouse homolog gene list
+rm(list=ls())
+library(dplyr)
+dataD <- read.delim("~/Desktop/extractedHomologene.txt", stringsAsFactors = FALSE)
+dataD <- dataD[,c("X10090_Musmusculus_Genename", "X9606_Homosapiens_Genename")]
+outD <- filter(dataD, X10090_Musmusculus_Genename != "NONE",  X9606_Homosapiens_Genename != "NONE")
+colnames(outD) <- c("Mouse_gene", "Human_gene")
+write.table(outD, file="~/Desktop/MouseHumanHomolog.txt", quote=FALSE, sep="\t", row.names=FALSE)

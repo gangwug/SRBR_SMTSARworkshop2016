@@ -95,7 +95,7 @@ exerciseE <- livD[sample(1:rownum, curvnum), c("ProbeID", indexE)]
 write.csv(exerciseE, file = "./data/exerciseE.csv", quote = FALSE, row.names = FALSE)
 
 ## generate an experimental like data (2h / 2days begins with CT18), csv file
-curvnum <- 10000
+curvnum <- 20000
 experimentA <- livD[sample(1:rownum, curvnum), c("ProbeID", seq(18, 64, by = 2))]
 write.csv(experimentA, file = "./data/experimentA.csv", quote = FALSE, row.names = FALSE)
 

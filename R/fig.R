@@ -72,6 +72,7 @@ uniF <- function(inputD)  {
   }
   outD <- rbind(outD, multiD[uni_index2,])
   rownames(outD) <- 1:nrow(outD)
+  colnames(outD) <- c("SYMBOL", "meta2d_BH.Q", "meta2d_phase")
   return(outD)
 }
 
