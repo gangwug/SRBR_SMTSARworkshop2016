@@ -387,19 +387,30 @@ histFigure
 * #### Type below command in the 'Console' window of RStudio to prepare the file used to PSEA analysis
 
 ```{r, warning=FALSE, message=FALSE}
-# make sure that 'figureD' dataframe is not deleted, and select its 'CycID' and 'meta2d_phase' columns for later analysis
-phaseD <- select(figureD, CycID, meta2d_phase)
+# take a look at column names of 'cirD' dataframe
+colnames(cirD)
 # if it reports error after typing above command, please re-run the code of preparing 'figureD' in the first part of 3.5 section of this demo
+
+# select its 'CycID', "meta2d_BH.Q", 'meta2d_phase' columns for later analysis
+phaseD <- select(cirD, CycID, meta2d_BH.Q, meta2d_phase)
 
 # read in the annotation file-'annoDbiMainInfMouse4302.txt' in the 'data-raw' directory
 annoD <- read.delim("~/Desktop/SRBR_SMTSAworkshop-master/data-raw/Mouse4302ProbeAnnotation.txt", stringsAsFactors = FALSE)
+
 # add annotation information with 'inner_join' function of dplyr package
 phaseD <- inner_join(phaseD, annoD, by=c("CycID" = "PROBEID"))
 # take a look at the phaseD
 head(phaseD)
 
-# select "SYMBOL" and 'meta2d_phase' columns for PSEA analysis
-pseaD <- select(phaseD, SYMBOL, meta2d_phase)
+# select 'SYMBOL', 'meta2d_BH.Q' and 'meta2d_phase' columns for getting a dataframe without duplicate gene names
+ori_phaseD <- select(phaseD, SYMBOL, meta2d_BH.Q, meta2d_phase)
+# load the 'uniF' function from 'fig.R' for doing this work
+source("~/Desktop/SRBR_SMTSAworkshop-master/R/fig.R")
+# get a dataframe without duplicate gene names
+uni_phaseD <- uniF(ori_phaseD)
+
+# select 'SYMBOL' and 'meta2d_phase' columns for PSEA analysis
+pseaD <- select(uni_phaseD, SYMBOL, meta2d_phase)
 # take a look at the pseaD
 head(pseaD)
 
@@ -409,20 +420,10 @@ write.table(pseaD, file = "~/Desktop/SRBR_SMTSAworkshop-master/result/experiment
 
 * #### Check the 'result' directory and make sure there is a file named 'experimentPSEA.txt'
 
-### 4.2. Convert the mouse gene name to its human homolog gene name with 'MouseHumanConverter.jar'
+### 4.2. Convert the mouse gene name to its human homolog gene name
 
-* #### Go to 'PSEA-master' directory and open 'MouseHumanConverter.jar'
-* #### Click 'Browse' button under 'STEP 1 Select input file:' to upload the input file ('experimentPSEA.txt' in 'result' directory of 'SRBR_SMTSAworkshop-master') as shown below
+* #### Type below command in the 'Console' window of RStudio to convert the mouse gene name to its human homolog gene name
 
-![](../inst/images/4-2Step1.png)
-
-* #### Click 'Browse' button under 'STEP 2 Select output folder:' to select the directory used to store output file (select 'result' directory of 'SRBR_SMTSAworkshop-master') as shown below
-
-![](../inst/images/4-2Step2.png)
-
-* #### Click 'START' button under 'STEP 3 Generate output:' to generate output file and 'START' button will change to 'DONE' button as shown below
-
-![](../inst/images/4-2Step3.png)
 
 * #### Go to 'result' directory of 'SRBR_SMTSAworkshop-master' and you will find the output file named as 'human_experimentPSEA.txt'. The output file will look like below
 

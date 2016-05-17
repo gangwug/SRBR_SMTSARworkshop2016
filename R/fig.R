@@ -43,5 +43,36 @@ phaseHist <- function(inputD, binvalue=seq(0,24,by=1), histcol = "blue")  {
   phase.out <- ggdraw() + draw_plot(p)
   return(phase.out)
 }
+#### Get the data-frame with unique gene names if multiple rows with the same gene name
+uniF <- function(inputD)  {
+  ## set row and column names for the inputD
+  dimnames(inputD) <- list( "r"=1:nrow(inputD), "c"=c("Sym", "BHQ", "Pha") )
+  ## get the gene names with unique or multiple rows
+  gname <- inputD$Sym
+  gnamef <- as.factor(gname)
+  gname_sum <- table(gnamef)
+  uni_gname <- names(gname_sum[gname_sum == 1])
+  multi_gname <- names(gname_sum[gname_sum > 1])
+  ## select rows with the unique gene name
+  uni_index <- match(uni_gname, gname)
+  outD <- inputD[uni_index,]
+  ## select one row with smallest BHQ value for those multiple rows with same gene names
+  multiD <- inputD[-uni_index,]
+  rownames(multiD) <- 1:nrow(multiD)
+  uni_index2 <- NULL
+  for (i in 1:length(multi_gname))  {
+      tepname <- multi_gname[i]
+      tep_index <- which(multiD$Sym == tepname)
+      tepD <- multiD[tep_index,]
+      qva <- tepD$BHQ
+      names(qva) <- tep_index
+      ## get the row index with smallest BHQ value
+      min_index <- names(sort(qva))[1]
+      uni_index2 <- c(uni_index2, as.numeric(min_index))
+  }
+  outD <- rbind(outD, multiD[uni_index2,])
+  rownames(outD) <- 1:nrow(outD)
+  return(outD)
+}
 
   

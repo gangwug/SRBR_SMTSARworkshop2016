@@ -65,7 +65,7 @@ head(dataD)
 
 ##### 4. Take a look at the demo files
 
-The demo files will be uploaded under 'demo' directory of this repository at least five days before this workshop. 
+The demo files are under 'demo' directory of this repository. The 'demo.html' file could be opened with the default web browser. 
 
 ##### 5. Download three repositories to your notebook computer
 
