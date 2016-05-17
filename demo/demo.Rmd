@@ -255,14 +255,14 @@ dir()
 
 * #### Try to open a 'jar' file
 
-    + ##### Go to "PSEA-master" directory, and could see two 'jar' files-'MouseHumanConverter.jar' and 'PSEA1.1_VectorGraphics.jar'
-    + ##### Right click one file and click 'open'. On mac computer, it may show below dialog, and just click 'Open'.
+    + ##### Go to "PSEA-master" directory, and could see 'PSEA1.1_VectorGraphics.jar'
+    + ##### Right click this file and click 'open'. On mac computer, it may show below dialog, and just click 'Open'.
     ![](../inst/images/2-4JarOpen.png)
     
-    + ##### If these two 'jar' files could be successfully opened, you could see below two dialogs (If not, please follow [README](https://github.com/gangwug/SRBR_SMTSAworkshop) file to install latest Java).
+    + ##### If these this 'jar' file is successfully opened, you could see below dialog (If not, please follow [README](https://github.com/gangwug/SRBR_SMTSAworkshop) file to install latest Java).
     ![](../inst/images/2-5PSEAdialog.png)
     
-    + ##### Now you could close these two 'jar' files, and begin to try **MetaCycle**.
+    + ##### Now you could close this 'jar' file, and begin to try **MetaCycle**.
 
 ## 3. The demo pipeline about MetaCycle
 
