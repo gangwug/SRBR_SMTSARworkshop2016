@@ -330,7 +330,7 @@ runApp("~/Desktop/MetaCycleApp-master")
 
 ### 3.4. Analyze the experimental data (it may take several minutes)
 
-* ##### experimentA:  1) evenly sampled with 2h interval covering two days (from CT18 to CT64), 2) no replicate or missing value, 3) sampling time information is numeric value in the header, 4) including 20K probesets (about 1/2 of total probesets for MOE4302 array)
+* ##### experimentA:  1) evenly sampled with 2h interval covering two days (from CT18 to CT64), 2) no replicate or missing value, 3) sampling time information is numeric value in the header, 4) including 15K probesets (about 1/3 of total probesets for MOE4302 array)
 
 * ##### general advice: 1) select 'JTK' and 'LS' in analyzing high-resolution datasets (eg. 2h / 2days, 'ARS' shows relative higher false positive rates in analyzing these kinds of datasets), 2) set 'minper' and 'maxper' both as '24' for searching circadian transcripts, 3) save outputs in 'result' directory and name it as 'meta2d_experimentA.csv', 4) if following above advice, you could see a window like below during analyzing this dataset
 
@@ -467,7 +467,7 @@ write.table(outD, file = "~/Desktop/SRBR_SMTSAworkshop-master/result/human_exper
 
 ![](../inst/images/4-3Step2.png)
 
-* #### Set corresponding parameters under 'STEP 3 Select parameters:' according to the sepecific study (for circadian study use the default parameter setting) as shown below
+* #### Set corresponding parameters under 'STEP 3 Select parameters:' according to the sepecific study (here we use default values, except set q value < 0.1) as shown below
 
 ![](../inst/images/4-3Step3.png)
 
