@@ -8,27 +8,25 @@ livD <- read.delim("./data-raw/Hughes2009_MouseLiver1h.txt", stringsAsFactors = 
 rownum <- nrow(livD)                 # the number of rows
 curvnum <- 20                        # the number of selected probesets for the case 
 
-## generate exerciseA dataset (4h / 1day begins with CT19), txt file
-exerciseA <- livD[sample(1:rownum, curvnum), ]
-exerciseA <- select(exerciseA, ProbeID, num_range("CT", seq(19, 39, by=4), width = 2) )
-write.table(exerciseA, file = "./data/exerciseA.txt", sep = "\t", quote = FALSE, row.names = FALSE)
-
-## generate caseB dataset (6h/2days begins with CT20, with one missing time point), txt file
-caseB <- livD[sample(1:rownum, curvnum), ]
-caseB <- select(caseB, ProbeID, num_range("CT", seq(20, 62, by=6), width = 2) )
-indexB <- sample(3:8, 1)
-caseB[,indexB] <- NA
-write.table(caseB, file = "./data/caseB.txt", sep = "\t", quote = FALSE, row.names = FALSE)
-
 ## generate caseA dataset (4h / 2days begins with CT18), csv file
 colnames(livD) <- c("ProbeID", 18:65)
 caseA <- livD[sample(1:rownum, curvnum), c("ProbeID", seq(18, 62, by=4))]
 write.csv(caseA, file = "./data/caseA.csv", quote = FALSE, row.names = FALSE)
 
+## generate caseB dataset (6h/2days begins with CT20, with one missing time point), txt file
+caseB <- livD[sample(1:rownum, curvnum), c("ProbeID", seq(20, 62, by=6))]
+indexB <- sample(3:8, 1)
+caseB[,indexB] <- NA
+write.table(caseB, file = "./data/caseB.txt", sep = "\t", quote = FALSE, row.names = FALSE)
+
 ## generate caseC dataset (cell cycle, sampling interval is 16min, 11 samples in total, default  time for one cell cycle in this kind of yease is 85min), csv file
 caseC <- cycYeastCycle
 colnames(caseC) <- c("ProbeID", seq(2, 162, by=16))
 write.csv(caseC, file = "./data/caseC.csv", quote = FALSE, row.names = FALSE)
+
+## generate exerciseA dataset (4h / 1day begins with CT19), txt file
+exerciseA <- livD[sample(1:rownum, curvnum), c("ProbeID", seq(19, 39, by=4))]
+write.table(exerciseA, file = "./data/exerciseA.txt", sep = "\t", quote = FALSE, row.names = FALSE)
 
 ## generate exerciseB and exerciseC dataset
 simuCurve <- function (records, replicates=1, cos.amp=1, sdv=1)

@@ -216,7 +216,9 @@ LS_pvalue      | pvalue from LS            |  meta2d_rAMP    | relative amplitud
 
 ## 2. Take a quick check about installed software and packages
 
-* #### Before the demo, please make sure that you have read the [README](https://github.com/gangwug/SRBR_SMTSAworkshop) file for this workshop. 
+* #### Before this demo, please make sure that you have read the [README](https://github.com/gangwug/SRBR_SMTSAworkshop) page for this workshop. 
+
+* #### Please open the 'demo.html' file in 'demo' directory of SRBR_SMTSAworkshop. You could copy and paste associated codes into RStudio, and do not need to type them line by line.
 
 * #### Check the installed RStudio and packages
     + ##### Click the RStudio icon to open it. The RStudio window will show as below (If the Console part(left bottom) does not shows 'R version 3.3.0', plese follow [README](https://github.com/gangwug/SRBR_SMTSAworkshop) file for installing the latest R version or switch to the latest R version):
@@ -253,16 +255,6 @@ dir()
 * #### If all required packages are successfully installed and three requied directories has been downloaded to the desktop of labtop, it would show below records in the Console part:
     ![](../inst/images/2-3CheckPackages.png)
 
-* #### Try to open a 'jar' file
-
-    + ##### Go to "PSEA-master" directory, and could see 'PSEA1.1_VectorGraphics.jar'
-    + ##### Right click this file and click 'open'. On mac computer, it may show below dialog, and just click 'Open'.
-    ![](../inst/images/2-4JarOpen.png)
-    
-    + ##### If these this 'jar' file is successfully opened, you could see below dialog (If not, please follow [README](https://github.com/gangwug/SRBR_SMTSAworkshop) file to install latest Java).
-    ![](../inst/images/2-5PSEAdialog.png)
-    
-    + ##### Now you could close this 'jar' file, and begin to try **MetaCycle**.
 
 ## 3. The demo pipeline about MetaCycle
 
@@ -288,12 +280,14 @@ library("shiny")
 runApp("~/Desktop/MetaCycleApp-master")
 ```
 
+* ##### To terminate the web application, just turn off the web application page or click red 'stop' button on top right of 'Console' window of RStudio.
+
 * ##### If the web application is successfully opened, it will show a window like below:
 ![](../inst/images/3-1MetaCycleApp.png)
 
 ### 3.2. Analyze three cases with the web application of meta2d
 
-* #### caseA (csv): 1) evenly sampled with 4h interval covering two days (from CT18 to CT62), 2) no replicate or missing value, 3) sampling time information is numeric value in the header
+* #### caseA: 1) evenly sampled with 4h interval covering two days (from CT18 to CT62), 2) no replicate or missing value
     + ##### goal: use JTK_CYCLE to detect circadian transcripts with MetaCycleApp
     + ##### step 1: click 'Choose File' button to upload caseA dataset from 'data' directory
     ![](../inst/images/3-2CaseA_Step1.png)
@@ -304,29 +298,29 @@ runApp("~/Desktop/MetaCycleApp-master")
     + ##### step 4: click 'download' button at bottom to download the outputs to 'result' directory and name the output file as 'meta2d_caseA.csv'
     ![](../inst/images/3-2CaseA_Step4.png)
 
-* #### caseB (txt): 1) evenly sampled with 6h interval covering two days (from CT20 to CT62), 2) no replicate 3) one missing time point at CT50, 4) sampling time information is non-numeric character in the header
+* #### caseB: 1) evenly sampled with 6h interval covering two days (from CT20 to CT62), 2) no replicate 3) one missing time point at CT50
     + ##### goal: use JTK_CYCLE and Lomb-Scargle to detect circadian transcripts with MetaCycleApp
     + ##### detail steps: 1) follow caseA to upload caseB dataset from 'data' directory, 2) parameters setting: select 'txt' under fileStyle, paste comma-delimited time values under 'timepoints', set 'minper' and 'maxper' to 24, and select 'JTK' and 'LS' under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save outputs (named as 'meta2d_caseB.txt') to 'result' directory, 5) you could see a window like below during analyzing caseB dataset
     ![](../inst/images/3-2CaseB.png)
     
-* #### caseC (csv): 1) cell cycle data from yeast, 2) evenly sampled with 16min interval from 2min to 162min, 3) no replicate or missing value, 4) the expected time length for cell cycle of this kind of yeast is 85min, 5) sampling time information is numeric value in the header
+* #### caseC: 1) cell cycle data from yeast, 2) evenly sampled with 16min interval from 2min to 162min, 3) no replicate or missing value, 4) the expected time length for cell cycle of this kind of yeast is 85min
     + ##### goal: use ARSER, JTK_CYCLE and Lomb-Scargle to detect cycling transcripts from yeast cell cycle dataset
     + ##### detail steps: 1) follow above cases to upload caseC dataset from 'data' directory, 2) parameters setting: select 'csv' under fileStyle, type 'Header' under 'timepoints', set 'minper' as 80 and 'maxper' as 96, set 'ARSdefaultPer' as 85, and select all three methods under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save outputs (named as 'meta2d_caseC.csv') to 'result' directory, 5) you could see a window like below during analyzing caseC dataset
     ![](../inst/images/3-2CaseC.png)
 
-### 3.3. Please analyze five exercise datasets with MetaCycleApp according to instructions mentioned above
+### 3.3. Please analyze five exercise datasets (file names containing 'exercise' in 'data' directory) with MetaCycleApp according to instructions mentioned above
 
-* ##### general advice: 1) five exercise datasets (with 'exercise' in the file name) could be found in 'data' directory, 2) select all three methods under 'cycMethod' and MetaCycleApp will automaticlly select methods that could be used to analyze input dataset, 3) for search circadian profiles, it is better to set both 'minper' and 'maxper' as 24, 4) select 'csv' or 'txt' under 'fileStyle' according to input file, 5) sampling time information is non-numeric character in the header of exerciseA, please type comma-deliated time values under 'timepoints'; for other exercise datasets, type 'Header' under 'timepoints', 6) save the outputs in 'result' directory with different names
+* ##### exerciseA (txt): 1) evenly sampled with 4h interval covering one day (from CT19 to CT39), 2) no replicate or missing value
 
-* ##### exerciseA (txt): 1) evenly sampled with 4h interval covering one day (from CT19 to CT39), 2) no replicate or missing value, 3) sampling time information is non-numeric character in the header
+* ##### exerciseB (csv): 1) evenly sampled with 4h interval covering two days, 2) three replicates at each time point, 3) no missing value
 
-* ##### exerciseB (csv): 1) evenly sampled with 4h interval covering two days, 2) three replicates at each time point, 3) no missing value, 4) sampling time information is numeric value in the header
+* ##### exerciseC (csv): 1) evenly sampled with 4h interval covering two days, 2) varied number of replicates at each time point, 3) no missing value
 
-* ##### exerciseC (csv): 1) evenly sampled with 4h interval covering two days, 2) varied number of replicates at each time point, 3) no missing value, 4) sampling time information is numeric value in the header
+* ##### exerciseD (csv): 1) evenly sampled with 3h interval covering two days (from CT0 to CT45), 2) three replicates at each time point 3) there is random missing value in some rows
 
-* ##### exerciseD (csv): 1) evenly sampled with 3h interval covering two days (from CT0 to CT45), 2) three replicates at each time point 3) there is random missing value in some rows, 4) sampling time information is numeric value in the header
+* ##### exerciseE (csv): 1) un-evenly sampled from CT19 to CT57, 2) no replicates or missing value
 
-* ##### exerciseE (csv): 1) un-evenly sampled from CT19 to CT57, 2) no replicates or missing value, 3) sampling time information is numeric value in the header
+* ##### general advice: 1) try exerciseA and exerciseB within this workshop and do the remaining after this workshop, 2) select all three methods under 'cycMethod' and MetaCycleApp will automaticlly select methods that could be used to analyze input dataset, 3) to search circadian profiles, it is better to set both 'minper' and 'maxper' as 24, 4) select 'csv' or 'txt' under 'fileStyle' according to input file
 
 ### 3.4. Analyze the experimental data (it may take several minutes)
 
@@ -382,6 +376,16 @@ histFigure
 ## 4. The demo pipeline about PSEA
 
 #### Phase Set Enrichment Analysis (PSEA) is designed to incorporate prior knowledge into the analysis of periodic data. PSEA could identify biologically related gene sets showing temporally coordinated expression. For more detail introduction about PSEA, please see Ray's [PSEA paper](http://jbr.sagepub.com/content/31/3/244.long). 
+
+* #### Try to open a 'jar' file
+
+    + ##### Go to "PSEA-master" directory, and could see 'PSEA1.1_VectorGraphics.jar'
+    + ##### Right click this file and click 'open'. On mac computer, it may show below dialog, and just click 'Open'.
+    ![](../inst/images/2-4JarOpen.png)
+    
+    + ##### If these this 'jar' file is successfully opened, you could see below dialog (If not, please follow [README](https://github.com/gangwug/SRBR_SMTSAworkshop) file to install latest Java).
+    ![](../inst/images/2-5PSEAdialog.png)
+    
 ### 4.1. Prepare the file used for PSEA analysis
 
 * #### Type below command in the 'Console' window of RStudio to prepare the file used to PSEA analysis
@@ -463,7 +467,7 @@ write.table(outD, file = "~/Desktop/SRBR_SMTSAworkshop-master/result/human_exper
 
 ![](../inst/images/4-3Step1.png)
 
-* #### Click 'Browse' button under 'STEP 2 Select sets file:' to select the biologically related gene sets file (select 'c2.all.v5.1.symbols.gmt' file in 'PSEA-master' directory) as shown below
+* #### Click 'Browse' button under 'STEP 2 Select sets file:' to select the biologically related gene sets file (select 'c2.all.v5.1.symbols.gmt' file in 'data-raw' directory) as shown below
 
 ![](../inst/images/4-3Step2.png)
 
