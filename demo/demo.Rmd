@@ -280,6 +280,10 @@ library("shiny")
 runApp("~/Desktop/MetaCycleApp-master")
 ```
 
+* ##### IMPORTANT NOTE: for windows system users, it is required to click 'Open in Browser' button for downloading the analysis outputs to local computer. 
+
+![](../inst/images/3-1OpenWeb.png)
+
 * ##### To terminate the web application, just turn off the web application page or click red 'stop' button on top right of 'Console' window of RStudio.
 
 * ##### If the web application is successfully opened, it will show a window like below:
@@ -287,7 +291,7 @@ runApp("~/Desktop/MetaCycleApp-master")
 
 ### 3.2. Analyze three cases with the web application of meta2d
 
-* #### caseA: 1) evenly sampled with 4h interval covering two days (from CT18 to CT62), 2) no replicate or missing value
+* #### caseA (csv): 1) evenly sampled with 4h interval covering two days (from CT18 to CT62), 2) no replicate or missing value
     + ##### goal: use JTK_CYCLE to detect circadian transcripts with MetaCycleApp
     + ##### step 1: click 'Choose File' button to upload caseA dataset from 'data' directory
     ![](../inst/images/3-2CaseA_Step1.png)
@@ -298,12 +302,12 @@ runApp("~/Desktop/MetaCycleApp-master")
     + ##### step 4: click 'download' button at bottom to download the outputs to 'result' directory and name the output file as 'meta2d_caseA.csv'
     ![](../inst/images/3-2CaseA_Step4.png)
 
-* #### caseB: 1) evenly sampled with 6h interval covering two days (from CT20 to CT62), 2) no replicate 3) one missing time point at CT50
+* #### caseB (txt): 1) evenly sampled with 6h interval covering two days (from CT20 to CT62), 2) no replicate 3) one missing time point at CT50
     + ##### goal: use JTK_CYCLE and Lomb-Scargle to detect circadian transcripts with MetaCycleApp
     + ##### detail steps: 1) follow caseA to upload caseB dataset from 'data' directory, 2) parameters setting: select 'txt' under fileStyle, paste comma-delimited time values under 'timepoints', set 'minper' and 'maxper' to 24, and select 'JTK' and 'LS' under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save outputs (named as 'meta2d_caseB.txt') to 'result' directory, 5) you could see a window like below during analyzing caseB dataset
     ![](../inst/images/3-2CaseB.png)
     
-* #### caseC: 1) cell cycle data from yeast, 2) evenly sampled with 16min interval from 2min to 162min, 3) no replicate or missing value, 4) the expected time length for cell cycle of this kind of yeast is 85min
+* #### caseC (csv): 1) cell cycle data from yeast, 2) evenly sampled with 16min interval from 2min to 162min, 3) no replicate or missing value, 4) the expected time length for cell cycle of this kind of yeast is 85min
     + ##### goal: use ARSER, JTK_CYCLE and Lomb-Scargle to detect cycling transcripts from yeast cell cycle dataset
     + ##### detail steps: 1) follow above cases to upload caseC dataset from 'data' directory, 2) parameters setting: select 'csv' under fileStyle, type 'Header' under 'timepoints', set 'minper' as 80 and 'maxper' as 96, set 'ARSdefaultPer' as 85, and select all three methods under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save outputs (named as 'meta2d_caseC.csv') to 'result' directory, 5) you could see a window like below during analyzing caseC dataset
     ![](../inst/images/3-2CaseC.png)
