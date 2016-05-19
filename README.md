@@ -84,12 +84,12 @@ The demo files are under 'demo' directory of this repository. The 'demo.html' fi
 
 ## Update news
 
-*Please keep track of this page, which may have updates (e.g. newly required packages or files for this demo).*
+**Please keep track of this page, which may have updates (e.g. newly required packages or files for this demo).**
 
 * ### Update news (May 19)
 
-    +#### We put four new files in 'data' and 'result' directory.
-    +#### We will leave a message in this page when the final presentation files are uploaded in 'demo' directory.
-    +#### For windows users, please change the default download folder to Desktop and follow the instructions for [Chrome](https://support.google.com/chrome/answer/95759?co=GENIE.Platform%3DDesktop&hl=en) or [Firefox](http://audible.custhelp.com/app/answers/detail/a_id/4661/~/how-can-i-change-my-download-location-using-firefox%3F).
+    + We put four new files in 'data' and 'result' directory.
+    + We will leave a message in this page when the final presentation files are uploaded in 'demo' directory.
+    + For windows users, please change the default download folder to Desktop and follow the instructions for [Chrome](https://support.google.com/chrome/answer/95759?co=GENIE.Platform%3DDesktop&hl=en) or [Firefox](http://audible.custhelp.com/app/answers/detail/a_id/4661/~/how-can-i-change-my-download-location-using-firefox%3F).
 
 
