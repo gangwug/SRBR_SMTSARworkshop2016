@@ -12,11 +12,11 @@ vignette: >
 
 ### 1.1. General description about MetaCycle
 
-The **MetaCycle** package is mainly used for detecting rhythmic signals from large scale time-series data. It incorporates [ARSER(ARS)](https://github.com/cauyrd/ARSER), [JTK_CYCLE(JTK)](http://openwetware.org/wiki/HughesLab:JTK_Cycle), and [Lomb-Scargle(LS)](http://research.stowers-institute.org/efg/2005/LombScargle/) properly for periodic signal detection, and could also output integrated analysis results if required. 
+The **MetaCycle** package is used to detect rhythmic signals in large scale time-series data. It uses three algorithms, [ARSER (ARS)](https://github.com/cauyrd/ARSER), [JTK_CYCLE (JTK)](http://openwetware.org/wiki/HughesLab:JTK_Cycle), and [Lomb-Scargle (LS)](http://research.stowers-institute.org/efg/2005/LombScargle/), to detect periodic signals and can output integrated analysis results.  
 
 ### 1.2. Types of time-series data
 
-The usual time-series data is evenly sampled once at each time point, and the interval between neighbour time points is integer. Not all data are as simple as this. There are datasets with replicate samples, or with missing values, or un-evenly sampled, or sampled with a non-integer interval. Examples of these types of data are shown in the below table. 
+Usually, circadian time-series data is evenly sampled and the interval between time points is an integer (e.g. 4 hrs). However, sometimes there are replicate samples, missing values or un-evenly sampled series, or sampling with a non-integer interval. Examples of these types of data are shown in this table. 
 
 Data Type                    | Point 1| Point 2| Point 3| Point 4| Point 5| Point 6
 ---------------------------  | -------| -------| -------| -------| -------| -------
@@ -26,7 +26,7 @@ With replicates              | CT0    | CT0    | CT8    | CT8    | CT16   | CT16
 With un-even interval        | CT0    | CT2    | CT8    | CT10   | CT16   | CT20
 With non-integer interval    | CT0    | CT4.5  | CT9    | CT13.5 | CT18   | CT22.5  
 
-Of course, some datasets may seem combination of two or more of above types of data.
+Some datasets can have one or more of these conditions, e.g.
 
 Data Type                           | Point 1| Point 2| Point 3| Point 4| Point 5| Point 6
 ------------------------------------| -------| -------| -------| -------| -------| -------
@@ -35,7 +35,7 @@ With un-even interval and replicates| CT0    | CT2    | CT2    | CT10   | CT16  
 
 ### 1.3. Method selection
 
-The **meta2d** function in **MetaCycle** is designed to analyze differnt types of time-series datasets, and it could automatically select proper method to analyze different types of input datasets. The implementation strategy used for **meta2d** is shown in the flow chart.
+The **meta2d** function in **MetaCycle** is designed to analyze differnt types of time-series datasets and can automatically select the proper methods to analyze different experimental designs. The implementation strategy used for **meta2d** is shown in the flow chart.
 
 ```{r, echo=FALSE, warning=FALSE, fig.width=6.65, fig.height=5}
 library(shape)
@@ -96,23 +96,23 @@ text(NposM[,1], NposM[,2], labels="N", cex=0.8, font=2)
 
 ### 1.4. Integration strategies
 
-In addition to selecting proper methods to analyze different kinds of datasets, **meta2d** could also output integrated results from multiple methods. Detail explaination about integration stragegies is in the [vignettes](https://cran.r-project.org/web/packages/MetaCycle/vignettes/implementation.html) of MetaCycle.
+In addition to selecting the proper method(s) to analyze different experimental designs, **meta2d** can also integrate results from multiple methods. A detailed explanation of integration strategies is in the [vignettes](https://cran.r-project.org/web/packages/MetaCycle/vignettes/implementation.html) of MetaCycle.
 
 * ##### Pvalue
 
-    + [Fisher's method](https://en.wikipedia.org/wiki/Fisher%27s_method) is implemented in **meta2d** for integrating multiple p-values. 
+    + For integrating multiple p-values, [Fisher's method](https://en.wikipedia.org/wiki/Fisher%27s_method) is implemented. 
 
 * ##### Period and phase
 
-    + The integrated period is an arithmetic mean value of multiple periods, while phase integration based on [mean of circular quantities](https://en.wikipedia.org/wiki/Mean_of_circular_quantities) is implemented in **meta2d**.
+    + The integrated period is an arithmetic mean value of multiple periods, while phase integration is based on the [mean of circular quantities](https://en.wikipedia.org/wiki/Mean_of_circular_quantities).
 
 *  ##### Amplitude calculation
 
-    + **meta2d** recalculates the amplitude with following model:
+    + **meta2d** calculates the amplitude with following model:
 $$Y_i = B + TRE*(t_i - \frac{\sum_{i=1}^n t_i}{n}) + A*cos(2*\pi*\frac{t_i - PHA}{PER})$$
 
-    + B is baseline level of the time-series profile; TRE is trend level of the time-series profile; A is the amplitude of the waveform. PHA and PER are integrated period and phase mentioned above. 
-    + The baseline and trend level are explained in the below example.
+    + B is the baseline level of the time-series data; TRE is its trend; A is the amplitude of the waveform. PHA and PER are integrated period and phase from above. 
+    + The baseline and trend are explained below.
 
 ```{r, echo=FALSE, warning=FALSE, fig.width=6.65, fig.height=5}
 library(MetaCycle)
@@ -152,8 +152,8 @@ text_value <- unlist(ampL)
 text(rep(6,6), c(8, 5, 2), round(text_value[1:3], 1), adj=0)
 ```
 
-*  ##### About rAMP
-    + **meta2d** outputs a relative amplitude value (rAMP), which normalizes amplitude values with expression levels. For example, *Ugt2b34* has a larger amplitude than *Arntl*, but its rAMP is smaller than *Arntl*.
+*  ##### About relative amplitude (rAMP)
+    + **meta2d** outputs a relative amplitude value (rAMP), which normalizes amplitude to overall expression levels. For example, *Ugt2b34* has a larger amplitude than *Arntl*, but its rAMP is smaller than *Arntl*.
 
 ```{r, echo=FALSE, warning=FALSE, fig.width=6.65, fig.height=5}
 cirD <- cycVignettesAMP
@@ -202,30 +202,30 @@ text(c(5,5), c(3,1.5), round(as.numeric(cirD[2, 22:23]), 2), col="red", adj=0)
 
 Column name    | Description               |  Column name    | Description 
 -------------  | -----------------------   |  ---------------| --------------   
-ARS_pvalue     | pvalue from ARS           |  LS_BH.Q        | FDR from LS    
+ARS_pvalue     | p-value from ARS          |  LS_BH.Q        | FDR from LS    
 ARS_BH.Q       | FDR from ARS              |  LS_period      | period from LS
 ARS_period     | period from ARS           |  LS_adjphase    | adjusted phase from LS
 ARS_adjphase   | adjusted phase from ARS   |  LS_amplitude   | amplitude from LS
 ARS_amplitude  | amplitude from ARS        |  meta2d_pvalue  | integrated pvalue
-JTK_pvalue     | pvalue from JTK           |  meta2d_BH.Q    | FDR based on integrated pvalue
+JTK_pvalue     | p-value from JTK          |  meta2d_BH.Q    | FDR based on integrated pvalue
 JTK_BH.Q       | FDR from JTK              |  meta2d_period  | averaged period     
 JTK_period     | period from JTK           |  meta2d_phase   | integrated phase 
 JTK_adjphase   | adjusted phase from JTK   |  meta2d_Base    | baseline value given by meta2d 
 JTK_amplitude  | amplitude from JTK        |  meta2d_AMP     | amplitude given by meta2d 
-LS_pvalue      | pvalue from LS            |  meta2d_rAMP    | relative amplitude
+LS_pvalue      | p-value from LS           |  meta2d_rAMP    | relative amplitude
 
-## 2. Take a quick check about installed software and packages
+## 2. Install and check software and packages
 
 * #### Before this demo, please make sure that you have read the [README](https://github.com/gangwug/SRBR_SMTSAworkshop) page for this workshop. 
 
-* #### Please open the 'demo.html' file in 'demo' directory of SRBR_SMTSAworkshop. You could copy and paste associated codes into RStudio, and do not need to type them line by line.
+* #### Please open the 'demo.html' file in 'demo' directory of SRBR_SMTSAworkshop. You can copy and paste associated code into RStudio and don't need to type them in line by line.
 
 * #### Check the installed RStudio and packages
-    + ##### Click the RStudio icon to open it. The RStudio window will show as below (If the Console part(left bottom) does not shows 'R version 3.3.0', plese follow [README](https://github.com/gangwug/SRBR_SMTSAworkshop) file for installing the latest R version or switch to the latest R version):
+    + ##### Click the RStudio icon to open it. The RStudio window will show as below (If the Console part(left bottom) does not shows 'R version 3.3.0', please follow the [README](https://github.com/gangwug/SRBR_SMTSAworkshop) file for installing the latest version of R):
     
     ![](../inst/images/2-2RStudio.png)
     
-    + ##### Type below command in the Console part to check installed packages
+    + ##### Type the commands below in the Console to check installed packages
     
 ```{r, eval=FALSE, warning=FALSE}
 # load 'shiny' package
@@ -240,7 +240,7 @@ library("ggplot2")
 library("cowplot")
 ```
 
-* #### Check downloaded repositories
+* #### Check downloaded directories
 
     + ##### Type below command to check whether "MetaCycleApp-master", "PSEA-master" and "SRBR_SMTSAworkshop-master" directories are on the desktop of laptop
 
@@ -252,15 +252,15 @@ setwd("~/Desktop")
 dir()
 ```
 
-* #### If all required packages are successfully installed and three requied directories has been downloaded to the desktop of labtop, it would show below records in the Console part:
+* #### If all the required packages are successfully installed and directories are downloaded to your computer, the Console should display:
     ![](../inst/images/2-3CheckPackages.png)
 
 
-## 3. The demo pipeline about MetaCycle
+## 3. The MetaCycle demo
 
-### 3.1. Open the web application of **meta2d**
+### 3.1. Open the **meta2d** web application 
 
-* ##### Option 1: use 'runGitHub' function by typing below command in the 'Console' window of RStudio (this option requires that the laptop is connected with internet)
+* ##### Option 1: use the 'runGitHub' function. Type the command below in the RStudio 'Console' (requires Internet connection)
 
 ```{r, eval=FALSE, warning=FALSE}
 # load shiny package
@@ -270,7 +270,7 @@ library("shiny")
 runGitHub("MetaCycleApp", "gangwug")
 ```
 
-* ##### Option 2: use 'runApp' function by typing below command in the 'Console' window of RStudio (this option does not require that the laptop is connected with internet)
+* ##### Option 2: use the 'runApp' function. Type the command below in the RStudio 'Console'
 
 ```{r, eval=FALSE, warning=FALSE}
 # load shiny package
@@ -280,41 +280,41 @@ library("shiny")
 runApp("~/Desktop/MetaCycleApp-master")
 ```
 
-* ##### IMPORTANT NOTE: For windows users, it is required to click 'Open in Browser' button for downloading the analysis outputs to local computer. For mac users, it is optional to click 'Open in Browser' button and we suggest not to click this button for this demo.
+* ##### IMPORTANT NOTE: Windows users need to click the 'Open in Browser' button to download analyses to their computer. 
 
 ![](../inst/images/3-1OpenWeb.png)
 
-* ##### To terminate the web application, just turn off the web application page or click red 'stop' button on top right of 'Console' window of RStudio.
+* ##### To terminate the web application, click the red 'stop' button on top right of the RStudio 'Console'.
 
-* ##### If the web application is successfully opened, it will show a window like below:
+* ##### If the web app is running, it will show:
 
 ![](../inst/images/3-1MetaCycleApp.png)
 
-### 3.2. Analyze three cases with the web application of meta2d
+### 3.2. Use the meta2d web app to analyze three use cases
 
-* #### caseA (csv): 1) evenly sampled with 4h interval covering two days (from CT18 to CT62), 2) no replicate or missing value
-    + ##### goal: use JTK_CYCLE to detect circadian transcripts with MetaCycleApp
-    + ##### step 1: click 'Choose File' button to upload caseA dataset from 'data' directory
+* #### case A (csv): 1) evenly sampled, 4h interval over 2 days (from CT18 to CT62) with no replicates or missing values
+    + ##### goal: use JTK_CYCLE to detect circadian transcripts
+    + ##### step 1: click 'Choose File' button to upload case A dataset from 'data' directory
     ![](../inst/images/3-2CaseA_Step1.png)
     + ##### step 2: set the parameters as shown below (set 'minper' and 'maxper' to 24 and select 'JTK' from 'cycMethod') and click 'Run' button
     ![](../inst/images/3-2CaseA_Step2.png)
-    + ##### step 3: take a quick check of the analysis results
+    + ##### step 3: check the analysis results
     ![](../inst/images/3-2CaseA_Step3.png)
-    + ##### step 4 (mac users): click 'download' button at bottom to download the outputs to Desktop and name the output file as 'meta2d_caseA.csv'
+    + ##### step 4 (Mac users): click 'download' button to download the output to the Desktop and name the output file "meta2d_caseA.csv"
     ![](../inst/images/3-2CaseA_Step4Mac.png)
-    + ##### step 4 (windows users): Change the default download folder to Desktop, and you could follow the introduction for [Chrome](https://support.google.com/chrome/answer/95759?co=GENIE.Platform%3DDesktop&hl=en) or [Firefox](http://audible.custhelp.com/app/answers/detail/a_id/4661/~/how-can-i-change-my-download-location-using-firefox%3F). Click 'download' button at bottom to download the outputs to laptop. There will be a file named as 'meta2d.csv' in the download folder for used web browser. Manually re-name this file as 'meta2d_caseA.csv'.
+    + ##### step 4 (Windows users): Change the default download folder to Desktop and follow the instructions for [Chrome](https://support.google.com/chrome/answer/95759?co=GENIE.Platform%3DDesktop&hl=en) or [Firefox](http://audible.custhelp.com/app/answers/detail/a_id/4661/~/how-can-i-change-my-download-location-using-firefox%3F). Click 'download' button to download the output. There will be a file named 'meta2d.csv' in the download folder. Manually re-name this file 'meta2d_caseA.csv'.
 
-* #### caseB (txt): 1) evenly sampled with 6h interval covering two days (from CT20 to CT62), 2) no replicate 3) one missing time point at CT50
-    + ##### goal: use JTK_CYCLE and Lomb-Scargle to detect circadian transcripts with MetaCycleApp
-    + ##### detail steps: 1) follow caseA to upload caseB dataset from 'data' directory, 2) parameters setting: select 'txt' under fileStyle, set 'minper' and 'maxper' to 24, and select 'JTK' and 'LS' under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save output (name it as 'meta2d_caseB.txt'), 5) you could see a window like below during analyzing caseB dataset
+* #### case B (txt): 1) evenly sampled, 6h interval over two days (from CT20 to CT62), no replicates, but 1 missing time point (CT50)
+    + ##### goal: use JTK_CYCLE and Lomb-Scargle to detect circadian transcripts
+    + ##### steps: 1) as above, upload case B dataset from 'data' directory, 2) parameters setting: select 'txt' under fileStyle, set 'minper' and 'maxper' to 24, and select 'JTK' and 'LS' under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save output (name it as 'meta2d_caseB.txt'), 5) you should see a window like the below during the analysis
     ![](../inst/images/3-2CaseB.png)
     
-* #### caseC (csv): 1) cell cycle data from yeast, 2) evenly sampled with 16min interval from 2min to 162min, 3) no replicate or missing value, 4) the expected time length for cell cycle of this kind of yeast is 85min
-    + ##### goal: use ARSER, JTK_CYCLE and Lomb-Scargle to detect cycling transcripts from yeast cell cycle dataset
-    + ##### detail steps: 1) follow above cases to upload caseC dataset from 'data' directory, 2) parameters setting: select 'csv' under fileStyle, set 'minper' as 80 and 'maxper' as 96, set 'ARSdefaultPer' as 85, and select all three methods under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save output (name it as 'meta2d_caseC.csv'), 5) you could see a window like below during analyzing caseC dataset
+* #### case C (csv): 1) cell cycle data from yeast, 2) evenly sampled, 16 min interval from 2 min to 162 min, 3) no replicates or missing values, 4) the expected period is 85 min
+    + ##### goal: use ARSER, JTK_CYCLE, and Lomb-Scargle to detect cycling transcripts in the yeast cell cycle
+    + ##### steps: 1) upload case C dataset from 'data' directory as above, 2) parameter settings: select 'csv' under fileStyle, set 'minper' as 80 and 'maxper' as 96, set 'ARSdefaultPer' as 85, and select all three methods under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save output (name it as 'meta2d_caseC.csv'), 5) you could see a window like below during analyzing caseC dataset
     ![](../inst/images/3-2CaseC.png)
 
-### 3.3. Do some practice with MetaCycleApp according to instructions mentioned above. There are five exercise datasets (file names containing 'exercise') in 'data' directory, please analyze exerciseA and exerciseB within this workshop, and do the remaining after this workshop.
+### 3.3. Homework: Practice MetaCycleApp. There are five exercise datasets (file names containing 'exercise') in 'data' directory, please analyze exerciseA and exerciseB within this workshop, and do the remaining after this workshop.
 
 * ##### exerciseA (txt): 1) evenly sampled with 4h interval covering one day (from CT19 to CT39), 2) no replicate or missing value
 
@@ -328,23 +328,23 @@ runApp("~/Desktop/MetaCycleApp-master")
 
 * ##### general advice: 1) select all three methods under 'cycMethod' and MetaCycleApp will automaticlly select methods that could be used to analyze input dataset, 2) to search circadian profiles, it is better to set both 'minper' and 'maxper' as 24, 3) select 'csv' or 'txt' under 'fileStyle' according to input file, 4) name outputs as 'meta2d_exercise*'
 
-### 3.4. Analyze one experimental data (it may take several minutes)
+### 3.4. Analyze experimental data (this may take several minutes)
 
-* ##### experimentA:  1) evenly sampled with 2h interval covering two days (from CT18 to CT64), 2) no replicate or missing value, 3) sampling time information is numeric value in the header, 4) including 15K probesets (about 1/3 of total probesets for MOE4302 array)
+* ##### experimentA:  1) evenly sampled with 2h interval covering two days (from CT18 to CT64), 2) no replicates or missing values, 3) sampling time information is numeric value in the header, 4) 15K probesets (about 1/3 of total probesets for MOE4302 array)
 
-* ##### general advice: 1) select 'JTK' and 'LS' in analyzing high-resolution datasets (eg. 2h / 2days, 'ARS' shows relative higher false positive rates in analyzing these kinds of datasets), 2) set 'minper' and 'maxper' both as '24' for searching circadian transcripts, 3) save output on Desktop and name it as 'meta2d_experimentA.csv', 4) if following above advice, you could see a window like below during analyzing this dataset
+* ##### general advice: 1) select 'JTK' and 'LS' in analyzing high-resolution datasets (for 2h over 2 days, 'ARS' has a higher false positive rate), 2) set 'minper' and 'maxper' both as '24' for searching circadian transcripts, 3) save output on Desktop and name it as 'meta2d_experimentA.csv', 4) you should see the following while analyzing this dataset
 
 ![](../inst/images/3-4ExperimentA.png)
 
-### 3.5. A short discussion part during MetaCycleApp's running process (Dr. John Hogenesch will lead this discussion part)
+### 3.5. John Hogenesch will lead a short discussion while MetaCycleApp'runs 
 
-* #### dicussionA: For studying circadian transcriptome, what is the difference for collecting samples covering one day and two days?
+* #### dicussion A: Why is 2 days better than 1?
 
-    + ##### datasets: 'dicussionA_1day.csv' and 'dicussionA_2days.csv' are in 'data' directory, which are re-sampled (5000 probesets, 1h / 1day or 1h / 2days) from 'Hughes2009_MouseLiver1h.txt'
+    + ##### datasets: 'dicussionA_1day.csv' and 'dicussionA_2days.csv' are in the 'data' directory, which are re-sampled (5000 probesets, 1h / 1day or 1h / 2days) from 'Hughes2009_MouseLiver1h.txt'
     + ##### MetaCycleApp parameters: minper=maxeper=24, cycMethod=c("JTK", "LS")
     + ##### outputs: 'meta2d_dicussionA_1day.csv' and 'meta2d_dicussionA_2days.csv' are in 'result' directory
 
-* #### dicussionB: During the process of experimental design or reaching conclusion from the data, have we thought about the false negative rates?
+* #### dicussion B: Why isn't there better overlap?
 
     + ##### datasets: 'dicussionB_CT18.csv' and 'dicussionB_CT19.csv' are in 'data' directory, which are re-sampled (5000 probesets, 2h / 2days begins at CT18 or CT19) from 'Hughes2009_MouseLiver1h.txt'
     + ##### MetaCycleApp parameters: minper=maxeper=24, cycMethod=c("JTK", "LS")
@@ -352,7 +352,7 @@ runApp("~/Desktop/MetaCycleApp-master")
 
 ### 3.6. Check the expression profiles of circadian transcripts (FDR < 0.05) and show their phase distribution
 
-* #### Type below command in the 'Console' window of RStudio to prepare the dataframe ('figureD') used for drawing figures
+* #### Type below command in the RStudio 'Console' to prepare a dataframe ('figureD') used for plotting figures
 
 ```{r, eval=FALSE, warning=FALSE, message=FALSE}
 # copy the 'meta2d_experimentA.csv' file from Desktop to 'result' directory in SRBR_SMTSAworkshop-master
@@ -379,7 +379,7 @@ nrow(cirD)
 figureD <- select(cirD, CycID, meta2d_period, meta2d_phase, num_range("X", seq(18, 64, by=2), width = 2))
 ```
 
-* #### Type below command in the 'Console' window of RStudio to draw a heatmap figure of circadian transcripts (if the code runs well, a heatmap figure will show in the bottom right window of the RStudio)
+* #### Type the below command in the 'Console'to draw a heatmap of circadian transcripts (if the code runs well, a heatmap figure will show in the bottom right window)
 
 ```{r, warning=FALSE, message=FALSE}
 # load 'heatmapF' and 'phaseHist' function used to draw heatmap and histogram
@@ -391,7 +391,7 @@ heatmapFigure <- heatmapF(inputD = figureD, minfold=0.5, maxfold=2)
 heatmapFigure
 ```
 
-* #### Type below command in the 'Console' window of RStudio to draw a histgram for phase distribution of circadian transcripts selected above (if the code runs well, a histogram figure will show in the bottom right window of the RStudio)
+* #### Type the below command in the 'Console' to draw a histogram of the phase distribution of circadian transcripts (if the code runs, a histogram will show in the bottom right window)
 
 ```{r, warning=FALSE, message=FALSE}
 # get the phase distribtuion figure by 'phaseHist' function
@@ -400,9 +400,9 @@ histFigure <- phaseHist(inputD = figureD, binvalue=seq(0,24,by=2), histcol = "bl
 histFigure
 ```
 
-## 4. The demo pipeline about PSEA
+## 4. The PSEA demo
 
-#### Phase Set Enrichment Analysis (PSEA) is designed to incorporate prior knowledge into the analysis of periodic data. PSEA could identify biologically related gene sets showing temporally coordinated expression. For more detail introduction about PSEA, please see Ray's [PSEA paper](http://jbr.sagepub.com/content/31/3/244.long). 
+#### Phase Set Enrichment Analysis (PSEA) is designed to incorporate prior gene set knowledge in the analysis of periodic data. PSEA can identify gene sets showing temporally coordinated expression. For more info on PSEA, please see Ray Zhang's [PSEA paper](http://jbr.sagepub.com/content/31/3/244.long). 
 
 * #### Try to open a 'jar' file
 
@@ -485,7 +485,7 @@ head(outD)
 write.table(outD, file = "~/Desktop/SRBR_SMTSAworkshop-master/result/human_experimentPSEA.txt", sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
 ```
 
-* #### Go to 'result' directory of SRBR_SMTSAworkshop-master and you will find the output file named as 'human_experimentPSEA.txt'. 
+* #### Go to 'result' directory of SRBR_SMTSAworkshop-master and you will find the output file 'human_experimentPSEA.txt'. 
 
 ### 4.3. Do PSEA analysis with 'PSEA1.1_VectorGraphics.jar'
 

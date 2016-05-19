@@ -7,7 +7,7 @@ library(ggplot2)
 #### This is the heatmap function
 heatmapF <- function(inputD, minfold=0.8, maxfold=1.25) {
   ## set column names for the inputD
-  colnames(inputD) <- c("CycID", "Per", "Pha", paste("sample", 1:(ncol(inputD) -3), sep=""))
+  colnames(inputD) <- c("CycID", "Pva", "Pha", paste("sample", 1:(ncol(inputD) -3), sep=""))
   ## arrange the input data by phase information
   inputD <- arrange(inputD, Pha)
   ## median normalization of the expression profiles
@@ -35,7 +35,7 @@ heatmapF <- function(inputD, minfold=0.8, maxfold=1.25) {
 #### This is the phase distribution function
 phaseHist <- function(inputD, binvalue=seq(0,24,by=1), histcol = "blue")  {
   ## set column names for the inputD
-  colnames(inputD) <- c("CycID", "Per", "Pha", paste("sample", 1:(ncol(inputD) -3), sep=""))
+  colnames(inputD) <- c("CycID", "Pva", "Pha", paste("sample", 1:(ncol(inputD) -3), sep=""))
   figD <- select(inputD, CycID, Pha)
   p <- ggplot(figD, aes(Pha)) + 
        geom_histogram(breaks = binvalue, col="grey60", fill=histcol, show.legend = FALSE) +
@@ -56,21 +56,23 @@ uniF <- function(inputD)  {
   ## select rows with the unique gene name
   uni_index <- match(uni_gname, gname)
   outD <- inputD[uni_index,]
-  ## select one row with smallest BHQ value for those multiple rows with same gene names
-  multiD <- inputD[-uni_index,]
-  rownames(multiD) <- 1:nrow(multiD)
-  uni_index2 <- NULL
-  for (i in 1:length(multi_gname))  {
-      tepname <- multi_gname[i]
-      tep_index <- which(multiD$Sym == tepname)
-      tepD <- multiD[tep_index,]
-      qva <- tepD$BHQ
-      names(qva) <- tep_index
-      ## get the row index with smallest BHQ value
-      min_index <- names(sort(qva))[1]
-      uni_index2 <- c(uni_index2, as.numeric(min_index))
+  if (nrow(outD) < nrow(inputD)) {
+      ## select one row with smallest BHQ value for those multiple rows with same gene names
+      multiD <- inputD[-uni_index,]
+      rownames(multiD) <- 1:nrow(multiD)
+      uni_index2 <- NULL
+      for (i in 1:length(multi_gname))  {
+          tepname <- multi_gname[i]
+          tep_index <- which(multiD$Sym == tepname)
+          tepD <- multiD[tep_index,]
+          qva <- tepD$BHQ
+          names(qva) <- tep_index
+          ## get the row index with smallest BHQ value
+          min_index <- names(sort(qva))[1]
+          uni_index2 <- c(uni_index2, as.numeric(min_index))
+      }
+      outD <- rbind(outD, multiD[uni_index2,])
   }
-  outD <- rbind(outD, multiD[uni_index2,])
   rownames(outD) <- 1:nrow(outD)
   colnames(outD) <- c("SYMBOL", "meta2d_BH.Q", "meta2d_phase")
   return(outD)
