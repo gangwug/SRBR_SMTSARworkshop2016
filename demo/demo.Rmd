@@ -280,13 +280,14 @@ library("shiny")
 runApp("~/Desktop/MetaCycleApp-master")
 ```
 
-* ##### IMPORTANT NOTE: for windows system users, it is required to click 'Open in Browser' button for downloading the analysis outputs to local computer. 
+* ##### IMPORTANT NOTE: For windows users, it is required to click 'Open in Browser' button for downloading the analysis outputs to local computer. For mac users, it is optional to click 'Open in Browser' button and we suggest not to click this button for this demo.
 
 ![](../inst/images/3-1OpenWeb.png)
 
 * ##### To terminate the web application, just turn off the web application page or click red 'stop' button on top right of 'Console' window of RStudio.
 
 * ##### If the web application is successfully opened, it will show a window like below:
+
 ![](../inst/images/3-1MetaCycleApp.png)
 
 ### 3.2. Analyze three cases with the web application of meta2d
@@ -299,20 +300,21 @@ runApp("~/Desktop/MetaCycleApp-master")
     ![](../inst/images/3-2CaseA_Step2.png)
     + ##### step 3: take a quick check of the analysis results
     ![](../inst/images/3-2CaseA_Step3.png)
-    + ##### step 4: click 'download' button at bottom to download the outputs to 'result' directory and name the output file as 'meta2d_caseA.csv'
-    ![](../inst/images/3-2CaseA_Step4.png)
+    + ##### step 4 (mac users): click 'download' button at bottom to download the outputs to Desktop and name the output file as 'meta2d_caseA.csv'
+    ![](../inst/images/3-2CaseA_Step4Mac.png)
+    + ##### step 4 (windows users): Change the default download folder to Desktop, and you could follow the introduction for [Chrome](https://support.google.com/chrome/answer/95759?co=GENIE.Platform%3DDesktop&hl=en) or [Firefox](http://audible.custhelp.com/app/answers/detail/a_id/4661/~/how-can-i-change-my-download-location-using-firefox%3F). Click 'download' button at bottom to download the outputs to laptop. There will be a file named as 'meta2d.csv' in the download folder for used web browser. Manually re-name this file to 'meta2d_caseA.csv'.
 
 * #### caseB (txt): 1) evenly sampled with 6h interval covering two days (from CT20 to CT62), 2) no replicate 3) one missing time point at CT50
     + ##### goal: use JTK_CYCLE and Lomb-Scargle to detect circadian transcripts with MetaCycleApp
-    + ##### detail steps: 1) follow caseA to upload caseB dataset from 'data' directory, 2) parameters setting: select 'txt' under fileStyle, paste comma-delimited time values under 'timepoints', set 'minper' and 'maxper' to 24, and select 'JTK' and 'LS' under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save outputs (named as 'meta2d_caseB.txt') to 'result' directory, 5) you could see a window like below during analyzing caseB dataset
+    + ##### detail steps: 1) follow caseA to upload caseB dataset from 'data' directory, 2) parameters setting: select 'txt' under fileStyle, set 'minper' and 'maxper' to 24, and select 'JTK' and 'LS' under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save outputs, 5) you could see a window like below during analyzing caseB dataset
     ![](../inst/images/3-2CaseB.png)
     
 * #### caseC (csv): 1) cell cycle data from yeast, 2) evenly sampled with 16min interval from 2min to 162min, 3) no replicate or missing value, 4) the expected time length for cell cycle of this kind of yeast is 85min
     + ##### goal: use ARSER, JTK_CYCLE and Lomb-Scargle to detect cycling transcripts from yeast cell cycle dataset
-    + ##### detail steps: 1) follow above cases to upload caseC dataset from 'data' directory, 2) parameters setting: select 'csv' under fileStyle, type 'Header' under 'timepoints', set 'minper' as 80 and 'maxper' as 96, set 'ARSdefaultPer' as 85, and select all three methods under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save outputs (named as 'meta2d_caseC.csv') to 'result' directory, 5) you could see a window like below during analyzing caseC dataset
+    + ##### detail steps: 1) follow above cases to upload caseC dataset from 'data' directory, 2) parameters setting: select 'csv' under fileStyle, set 'minper' as 80 and 'maxper' as 96, set 'ARSdefaultPer' as 85, and select all three methods under 'cycMethod', 3) click 'Run' button, 4) click 'Download' button to save outputs, 5) you could see a window like below during analyzing caseC dataset
     ![](../inst/images/3-2CaseC.png)
 
-### 3.3. Please analyze five exercise datasets (file names containing 'exercise' in 'data' directory) with MetaCycleApp according to instructions mentioned above
+### 3.3. Do some practice with MetaCycleApp according to instructions mentioned above. There are five exercise datasets (file names containing 'exercise') in 'data' directory, please analyze exerciseA and exerciseB within this workshop, and do the remaining after this workshop.
 
 * ##### exerciseA (txt): 1) evenly sampled with 4h interval covering one day (from CT19 to CT39), 2) no replicate or missing value
 
@@ -324,13 +326,13 @@ runApp("~/Desktop/MetaCycleApp-master")
 
 * ##### exerciseE (csv): 1) un-evenly sampled from CT19 to CT57, 2) no replicates or missing value
 
-* ##### general advice: 1) try exerciseA and exerciseB within this workshop and do the remaining after this workshop, 2) select all three methods under 'cycMethod' and MetaCycleApp will automaticlly select methods that could be used to analyze input dataset, 3) to search circadian profiles, it is better to set both 'minper' and 'maxper' as 24, 4) select 'csv' or 'txt' under 'fileStyle' according to input file
+* ##### general advice: 1) select all three methods under 'cycMethod' and MetaCycleApp will automaticlly select methods that could be used to analyze input dataset, 2) to search circadian profiles, it is better to set both 'minper' and 'maxper' as 24, 3) select 'csv' or 'txt' under 'fileStyle' according to input file
 
 ### 3.4. Analyze the experimental data (it may take several minutes)
 
 * ##### experimentA:  1) evenly sampled with 2h interval covering two days (from CT18 to CT64), 2) no replicate or missing value, 3) sampling time information is numeric value in the header, 4) including 15K probesets (about 1/3 of total probesets for MOE4302 array)
 
-* ##### general advice: 1) select 'JTK' and 'LS' in analyzing high-resolution datasets (eg. 2h / 2days, 'ARS' shows relative higher false positive rates in analyzing these kinds of datasets), 2) set 'minper' and 'maxper' both as '24' for searching circadian transcripts, 3) save outputs in 'result' directory and name it as 'meta2d_experimentA.csv', 4) if following above advice, you could see a window like below during analyzing this dataset
+* ##### general advice: 1) select 'JTK' and 'LS' in analyzing high-resolution datasets (eg. 2h / 2days, 'ARS' shows relative higher false positive rates in analyzing these kinds of datasets), 2) set 'minper' and 'maxper' both as '24' for searching circadian transcripts, 3) save outputs on Desktop and name it as 'meta2d_experimentA.csv', 4) if following above advice, you could see a window like below during analyzing this dataset
 
 ![](../inst/images/3-4ExperimentA.png)
 
