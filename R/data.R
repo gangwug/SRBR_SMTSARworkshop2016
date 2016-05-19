@@ -97,3 +97,30 @@ curvnum <- 20000
 experimentA <- livD[sample(1:rownum, curvnum), c("ProbeID", seq(18, 64, by = 2))]
 write.csv(experimentA, file = "./data/experimentA.csv", quote = FALSE, row.names = FALSE)
 
+## generate datasets for discussion part
+#### This script is used to generate series datasets for this workshop
+rm(list=ls())
+library(dplyr)
+## readin the liver dataset (1h / 2days)
+set.seed(10)
+livD <- read.delim("./data-raw/Hughes2009_MouseLiver1h.txt", stringsAsFactors = FALSE)
+colnames(livD) <- c("ProbeID", 18:65)
+rownum <- nrow(livD)                 # the number of rows
+curvnum <- 5000                      # the number of selected probesets for the case 
+index <- sample(1:rownum, curvnum)
+
+## generate discussionA_1h/1day dataset, csv file
+discussionA_1day <- livD[index, c("ProbeID", 18:41)]
+write.csv(discussionA_1day, file = "./data/discussionA_1day.csv", quote = FALSE, row.names = FALSE)
+
+## generate discussionA_1h/2days dataset, csv file
+discussionA_2days <- livD[index, c("ProbeID", 18:65)]
+write.csv(discussionA_2days, file = "./data/discussionA_2days.csv", quote = FALSE, row.names = FALSE)
+
+## generate discussionB_CT18 dataset, csv file
+discussionB_CT18 <- livD[index, c("ProbeID", seq(18, 64, by = 2))]
+write.csv(discussionB_CT18, file = "./data/discussionB_CT18.csv", quote = FALSE, row.names = FALSE)
+
+## generate discussionB_CT19 dataset, csv file
+discussionB_CT19 <- livD[index, c("ProbeID", seq(19, 65, by = 2))]
+write.csv(discussionB_CT19, file = "./data/discussionB_CT19.csv", quote = FALSE, row.names = FALSE)
