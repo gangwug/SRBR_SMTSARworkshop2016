@@ -326,8 +326,7 @@ runApp("~/Desktop/MetaCycleApp-master")
 
 * ##### exerciseE (csv): 1) un-evenly sampled from CT19 to CT57, 2) no replicates or missing value
 
-* ##### general advice: 1) select all three methods under 'cycMethod' and MetaCycleApp will automaticlly select methods that could be used to analyze input dataset, 2) to search circadian profiles, it is better to set both 'minper' and 'maxper' as 24, 3) select 'csv' or 'txt' under 'fileStyle' according to input file, 4)
-name outputs as 'meta2d_exercise*'
+* ##### general advice: 1) select all three methods under 'cycMethod' and MetaCycleApp will automaticlly select methods that could be used to analyze input dataset, 2) to search circadian profiles, it is better to set both 'minper' and 'maxper' as 24, 3) select 'csv' or 'txt' under 'fileStyle' according to input file, 4) name outputs as 'meta2d_exercise*'
 
 ### 3.4. Analyze one experimental data (it may take several minutes)
 
