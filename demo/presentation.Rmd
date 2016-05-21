@@ -307,13 +307,13 @@ runApp("~/Desktop/MetaCycleApp-master")
 
 ![](../inst/images/3-1OpenWeb.png)
 
-* ##### To terminate the web application, click the red 'stop' button on top right of the RStudio 'Console'.
-
 ----
 
 * ##### If the web app is running, it will show:
 
 ![](../inst/images/3-1MetaCycleApp.png)
+
+* ##### To terminate the web application, click the red 'stop' button on top right of the RStudio 'Console'.
 
 ----
 
@@ -613,10 +613,9 @@ write.table(outD, file = "~/Desktop/SRBR_SMTSAworkshop-master/result/human_exper
 
 ## 5. Try your data or share your experience of analyzing time-series data
 
-* ### Our experience
-    + #### We understand that there may be hard time in collecting samples and preparing libries, we hope that the data analysis step may be a little easier.
-    + #### The good experimental design is more important than selecting a statistical method.
-    + #### Take the features of different statistical methods into the experimental design step.
-    + #### There are more than 20 methods, fewer papers about method evaluation work.
+* ### Recommendations
 
-* ### Look forward to your feedback and analysis experience
+    + #### Experimental design >>> statistical methods. 
+    + #### There are now > 20 different algorithms to analyze genome wide periodic data.
+    + #### Pick your statistical method before you do the experiment (i.e. replicates, missing data)
+     + #### The Results are the beginning. Important: how will you follow up your hits? 

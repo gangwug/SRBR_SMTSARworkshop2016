@@ -124,3 +124,16 @@ write.csv(discussionB_CT18, file = "./data/discussionB_CT18.csv", quote = FALSE,
 ## generate discussionB_CT19 dataset, csv file
 discussionB_CT19 <- livD[index, c("ProbeID", seq(19, 65, by = 2))]
 write.csv(discussionB_CT19, file = "./data/discussionB_CT19.csv", quote = FALSE, row.names = FALSE)
+
+## recover the 'experimentA.csv' dataset
+rm(list=ls())
+library(dplyr)
+
+livD <- read.delim("./data-raw/Hughes2009_MouseLiver1h.txt", stringsAsFactors = FALSE)
+colnames(livD) <- c("ProbeID", 18:65)
+rownames(livD) <- livD$ProbeID
+oriD <- read.csv("./result/meta2d_experimentA.csv", stringsAsFactors=FALSE)
+probeID <- oriD$CycID
+outD <- livD[probeID,c("ProbeID", seq(18, 64, by = 2))]
+write.csv(outD, file = "./data/experimentA.csv", quote = FALSE, row.names = FALSE)
+

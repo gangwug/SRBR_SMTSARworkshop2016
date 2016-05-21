@@ -357,7 +357,7 @@ runApp("~/Desktop/MetaCycleApp-master")
 ```{r, eval=FALSE, warning=FALSE, message=FALSE}
 # copy the 'meta2d_experimentA.csv' file from Desktop to 'result' directory in SRBR_SMTSAworkshop-master
 file.copy(from = "~/Desktop/meta2d_experimentA.csv", 
-           to = "~/Desktop/SRBR_SMTSAworkshop-master/meta2d_experimentA.csv", overwrite = TRUE)
+           to = "~/Desktop/SRBR_SMTSAworkshop-master/result/meta2d_experimentA.csv", overwrite = TRUE)
 ```
 
 ```{r, warning=FALSE, message=FALSE}
@@ -520,4 +520,9 @@ write.table(outD, file = "~/Desktop/SRBR_SMTSAworkshop-master/result/human_exper
 
 ## 5. Try your data or share your experience of analyzing time-series data
 
+* ### Recommendations
 
+    + #### Experimental design >>> statistical methods. 
+    + #### There are now > 20 different algorithms to analyze genome wide periodic data.
+    + #### Pick your statistical method before you do the experiment (i.e. replicates, missing data)
+     + #### The Results are the beginning. Important: how will you follow up your hits? 
