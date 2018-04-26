@@ -7,7 +7,7 @@ The SMTSA workshop will be hosted by Dr. Tanya Leise of Amherst College and Dr. 
 ## Before the workshop
 
 ##### 1. Pre-installed software
-* Please visit [CRAN](https://cran.cnr.berkeley.edu) to download the latest released R(3.3.0) and install it on your notebook computer.
+* Please visit [CRAN](https://cran.cnr.berkeley.edu) to download the latest released R and install it on your notebook computer.
 * Please visit [RStudio](https://www.rstudio.com/products/rstudio/download/) (an Integrated Development Environment that makes programming easier) to download the latest released RStudio Desktop and install it on your notebook computer.
 * Please visit the [Java](http://java.com/en/download/manual.jsp) website to download the latest released Java and install it on your notebook computer.
 * If you only have Internet Explorer (IE) web browser on your laptop, please download and install another web browser (e.g. [Chrome](https://www.google.com/chrome/browser/desktop/) or [Firefox](https://www.mozilla.org/en-US/firefox/new/)) on your notebook computer. 
