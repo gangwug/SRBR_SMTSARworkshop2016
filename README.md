@@ -2,7 +2,7 @@
 This repository has the introduction and demo files used for the "Statistical Methods for Time Series Analysis of Rhythms" (SMTSAR) workshop at the 2016 SRBR meeting. 
 
 ## Introduction
-The SMTSA workshop will be hosted by Dr. Tanya Leise of Amherst College and Dr. John Hogenesch of the University of Cincinnati and the Cincinnati Children's Hospital Medical Center. This 90-minute workshop will give an overview of various statistical methods used for analyzing biological time-series data. The respective strengths and limitations of approaches will be discussed. Then, the workshop demo methods for evaluating periodicity in large scale data. During the demo, we will i) show how to analyze time-series datasets with various sampling resolution using [MetaCycle](http://biorxiv.org/content/early/2016/02/19/040345), and ii) do phase enrichment analysis with [PSEA](http://jbr.sagepub.com/content/31/3/244.long). Finally, we will leave 10 to 15 minutes in this workshop for participants, who are welcome to bring their own datasets and/or questions on analyzing time-series datasets to the workshop.
+The SMTSAR workshop will be hosted by Dr. Tanya Leise of Amherst College and Dr. John Hogenesch of the University of Cincinnati and the Cincinnati Children's Hospital Medical Center. This 90-minute workshop will give an overview of various statistical methods used for analyzing biological time-series data. The respective strengths and limitations of approaches will be discussed. Then, the workshop demo methods for evaluating periodicity in large scale data. During the demo, we will i) show how to analyze time-series datasets with various sampling resolution using [MetaCycle](http://biorxiv.org/content/early/2016/02/19/040345), and ii) do phase enrichment analysis with [PSEA](http://jbr.sagepub.com/content/31/3/244.long). Finally, we will leave 10 to 15 minutes in this workshop for participants, who are welcome to bring their own datasets and/or questions on analyzing time-series datasets to the workshop.
 
 ## Before the workshop
 
@@ -42,10 +42,10 @@ Please contact the workshop assistant (Gang Wu: wggucas@gmail.com) if you have p
 Knowing a little R language will be helpful for this workshop. If you have not used R before and are interested with learning R, take a quick tour in [DataCamp](https://www.datacamp.com/home), or [Try R](http://tryr.codeschool.com/levels/1/challenges/3) or [R tutorials](http://www.r-bloggers.com/how-to-learn-r-2/). At a minimum, please try the commands below in RStudio to learn a few basics about working with R.
 
 ```r
-# Suppose that there is a directory named 'SRBR_SMTSAworkshop' in the 'Desktop' directory, 
-# you could change the working directory to 'SRBR_SMTSAworkshop' through
+# Suppose that there is a directory named 'SRBR_SMTSARworkshop2016' in the 'Desktop' directory, 
+# you could change the working directory to 'SRBR_SMTSARworkshop2016' through
 # clicking 'Session | Set Working Directory | Choose Directory...', or by typing below command
-setwd("~/Desktop/SRBR_SMTSAworkshop") 
+setwd("~/Desktop/SRBR_SMTSARworkshop2016") 
 
 # how to load an installed package
 library(MetaCycle)
@@ -69,11 +69,11 @@ The demo files are under 'demo' directory of this repository. The 'demo.html' fi
 
 ##### 5. Download three repositories to your notebook computer
 
-* Click [SRBR_SMTSAworkshop](https://github.com/gangwug/SRBR_SMTSAworkshop/archive/master.zip), [MetaCycleApp](https://github.com/gangwug/MetaCycleApp/archive/master.zip) and [PSEA](https://github.com/ranafi/PSEA/archive/master.zip) one by one to download each repository to your notebook computer.
+* Click [SRBR_SMTSARworkshop2016](https://github.com/gangwug/SRBR_SMTSARworkshop2016/archive/master.zip), [MetaCycleApp](https://github.com/gangwug/MetaCycleApp/archive/master.zip) and [PSEA](https://github.com/ranafi/PSEA/archive/master.zip) one by one to download each repository to your notebook computer.
 * Unzip the downloaded repositories, and put them on the Desktop of your notebook computer.
 
 ##### 6. Prepare your own datasets if you hope to try them at the end of this workshop.
-* Prepare your own datasets in the same format as the sample sets. See the file 'Hughes2009_MouseLiver1h.txt' provided in the 'data-raw' directory of the SRBR_SMTSAworkshop repository as an example. 
+* Prepare your own datasets in the same format as the sample sets. See the file 'Hughes2009_MouseLiver1h.txt' provided in the 'data-raw' directory of the SRBR_SMTSARworkshop2016 repository as an example. 
 * Each time series data will be a row of the spreadsheet, with a top header row and a leftmost column of labels, saved as a tab-delimited txt file or comm-delimited csv file.
 
 ## Day of the workshop
